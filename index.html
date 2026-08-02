@@ -142,27 +142,34 @@ header{
 
 .mega-menu{
     position: absolute;
-    left: 50%;
+    left: 0;
     top: calc(100% + 12px);
+    width: 100vw;
+    background: transparent;
+    padding: 0 12px;
+    transform: translateY(-16px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.35s ease, opacity 0.28s ease, visibility 0.28s;
+    z-index: 60;
+}
+
+.mega-inner{
     width: 50vw;
-    max-width: 900px;
+    max-width: 1000px;
     min-width: 360px;
+    margin: 0 auto;
     background: var(--header-bg);
     color: var(--header-text);
     border-radius:14px;
     box-shadow: 0 30px 60px rgba(15,20,30,0.12);
     padding:20px;
-    transform: translate(-50%, -16px);
-    opacity: 0;
-    visibility: hidden;
-    transition: transform 0.35s ease, opacity 0.28s ease, visibility 0.28s;
-    z-index: 60;
     border: 1px solid var(--border);
 }
 
 .header-inner:hover .mega-menu,
 .header-inner:focus-within .mega-menu{
-    transform: translate(-50%, 0);
+    transform: translateY(0);
     opacity: 1;
     visibility: visible;
 }
@@ -182,6 +189,26 @@ header{
     display:grid;
     grid-template-columns: repeat(3, 1fr);
     gap:12px;
+}
+
+.mega-item img.thumb{
+    width:44px;
+    height:44px;
+    border-radius:8px;
+    object-fit:cover;
+}
+
+.mega-close{display:none; background:transparent;border:0;font-size:22px;cursor:pointer}
+
+@media (max-width: 900px){
+    .mega-inner{width:92vw}
+}
+
+@media (max-width: 800px){
+    .mega-menu{position:fixed; left:0; top:64px; width:100vw; padding:0; transform: translateY(-110%);}
+    .header-inner.open .mega-menu{transform: translateY(0); opacity:1; visibility:visible}
+    .mega-inner{border-radius:0; box-shadow:none; padding:14px; margin:0}
+    .mega-close{display:block; text-align:right; width:100%; padding:6px 0}
 }
 
 .mega-item{
@@ -407,61 +434,66 @@ footer{
             </div>
 
             <div class="mega-menu" role="navigation" aria-label="브랜드 메뉴">
-                <div class="mega-links">
-                    <a href="#about" style="font-weight:600;">소개</a>
-                    <a href="#types" style="font-weight:600;">종류</a>
-                    <a href="#features" style="font-weight:600;">특징</a>
-                    <div style="margin-left:auto">
-                        <button id="theme-toggle">🌙 다크 모드</button>
+                <div class="mega-inner">
+                    <button class="mega-close" aria-label="메뉴 닫기">×</button>
+                    <div class="mega-links">
+                        <a href="#about" style="font-weight:600;">소개</a>
+                        <a href="#types" style="font-weight:600;">종류</a>
+                        <a href="#features" style="font-weight:600;">특징</a>
+                        <div style="margin-left:auto">
+                            <button id="theme-toggle">🌙 다크 모드</button>
+                        </div>
                     </div>
-                </div>
-                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
-                    <strong>브랜드 컬렉션</strong>
-                    <small style="color:#666">대표 브랜드를 확인하세요</small>
-                </div>
-                <div class="mega-grid">
-                    <a class="mega-item" href="https://www.fender.com/" target="_blank" rel="noopener noreferrer">
-                        <div class="thumb">F</div>
-                        <div class="meta">
-                            <h4>Fender</h4>
-                            <p>Precision / Jazz 등 전통의 사운드</p>
-                        </div>
-                    </a>
-                    <a class="mega-item" href="https://www.ibanez.com/" target="_blank" rel="noopener noreferrer">
-                        <div class="thumb">I</div>
-                        <div class="meta">
-                            <h4>Ibanez</h4>
-                            <p>메탈과 모던 톤에 강한 디자인</p>
-                        </div>
-                    </a>
-                    <a class="mega-item" href="https://www.music-man.com/" target="_blank" rel="noopener noreferrer">
-                        <div class="thumb">M</div>
-                        <div class="meta">
-                            <h4>Music Man</h4>
-                            <p>액티브 픽업의 강력한 출력</p>
-                        </div>
-                    </a>
-                    <a class="mega-item" href="https://www.warnersound.com/warwick" target="_blank" rel="noopener noreferrer">
-                        <div class="thumb">W</div>
-                        <div class="meta">
-                            <h4>Warwick</h4>
-                            <p>독일 제작의 깊고 정밀한 저음</p>
-                        </div>
-                    </a>
-                    <a class="mega-item" href="#types">
-                        <div class="thumb">J</div>
-                        <div class="meta">
-                            <h4>기타 브랜드</h4>
-                            <p>더 많은 브랜드와 모델 보기</p>
-                        </div>
-                    </a>
-                    <a class="mega-item" href="#about">
-                        <div class="thumb">A</div>
-                        <div class="meta">
-                            <h4>소개</h4>
-                            <p>베이스에 대한 기본 정보</p>
-                        </div>
-                    </a>
+
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+                        <strong>브랜드 컬렉션</strong>
+                        <small style="color:#666">대표 브랜드를 확인하세요</small>
+                    </div>
+
+                    <div class="mega-grid">
+                        <a class="mega-item" href="https://www.fender.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="thumb" src="images/fender.svg" alt="Fender logo">
+                            <div class="meta">
+                                <h4>Fender</h4>
+                                <p>Precision / Jazz 등 전통의 사운드</p>
+                            </div>
+                        </a>
+                        <a class="mega-item" href="https://www.ibanez.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="thumb" src="images/ibanez.svg" alt="Ibanez logo">
+                            <div class="meta">
+                                <h4>Ibanez</h4>
+                                <p>메탈과 모던 톤에 강한 디자인</p>
+                            </div>
+                        </a>
+                        <a class="mega-item" href="https://www.music-man.com/" target="_blank" rel="noopener noreferrer">
+                            <img class="thumb" src="images/musicman.svg" alt="Music Man logo">
+                            <div class="meta">
+                                <h4>Music Man</h4>
+                                <p>액티브 픽업의 강력한 출력</p>
+                            </div>
+                        </a>
+                        <a class="mega-item" href="https://www.warnersound.com/warwick" target="_blank" rel="noopener noreferrer">
+                            <img class="thumb" src="images/warwick.svg" alt="Warwick logo">
+                            <div class="meta">
+                                <h4>Warwick</h4>
+                                <p>독일 제작의 깊고 정밀한 저음</p>
+                            </div>
+                        </a>
+                        <a class="mega-item" href="#types">
+                            <img class="thumb" src="images/fender.svg" alt="more brands">
+                            <div class="meta">
+                                <h4>기타 브랜드</h4>
+                                <p>더 많은 브랜드와 모델 보기</p>
+                            </div>
+                        </a>
+                        <a class="mega-item" href="#about">
+                            <img class="thumb" src="images/ibanez.svg" alt="about">
+                            <div class="meta">
+                                <h4>소개</h4>
+                                <p>베이스에 대한 기본 정보</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -603,6 +635,47 @@ footer{
             toggleButton.textContent = '☀️ 라이트 모드';
         }
     });
+</script>
+<script>
+// Mobile / accessibility: open/close mega-menu on tap
+const headerInner = document.querySelector('.header-inner');
+const megaClose = document.querySelector('.mega-close');
+const megaMenu = document.querySelector('.mega-menu');
+
+function isMobile() { return window.matchMedia('(max-width:800px)').matches }
+
+// Toggle open on header click for mobile
+headerInner.addEventListener('click', (e)=>{
+    if(!isMobile()) return;
+    // if click target is a link inside header, ignore
+    if(e.target.closest('a')) return;
+    headerInner.classList.toggle('open');
+    const expanded = headerInner.classList.contains('open');
+    headerInner.setAttribute('aria-expanded', expanded?'true':'false');
+});
+
+// Close button inside mega-menu for mobile
+megaClose && megaClose.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    headerInner.classList.remove('open');
+    headerInner.setAttribute('aria-expanded','false');
+});
+
+// Click outside to close on mobile
+document.addEventListener('click', (e)=>{
+    if(!isMobile()) return;
+    if(headerInner.contains(e.target)) return;
+    headerInner.classList.remove('open');
+    headerInner.setAttribute('aria-expanded','false');
+});
+
+// Ensure aria state on resize
+window.addEventListener('resize', ()=>{
+    if(!isMobile()){
+        headerInner.classList.remove('open');
+        headerInner.setAttribute('aria-expanded','false');
+    }
+});
 </script>
 <script>
 
