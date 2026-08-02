@@ -243,6 +243,18 @@ header{
     gap:12px;
 }
 
+.mega-layout{display:grid; grid-template-columns: 1.6fr 1fr; gap:20px; align-items:start}
+.mega-feature{padding:8px 6px}
+.mega-feature h2{font-size:1.6rem}
+
+/* overlay */
+#mega-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.28); opacity:0; visibility:hidden; transition:opacity 250ms ease; z-index:10500}
+#mega-overlay.show{opacity:1; visibility:visible}
+
+/* remove left thumbnail space by making items compact */
+.mega-item{padding:12px 10px}
+.mega-item .meta h4{font-size:1.02rem}
+
 .mega-item img.thumb{
     width:44px;
     height:44px;
@@ -502,54 +514,57 @@ footer{
                         </div>
                     </div>
 
-                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
-                        <strong>브랜드 컬렉션</strong>
-                        <small style="color:#666">대표 브랜드를 확인하세요</small>
-                    </div>
+                    <div class="mega-layout">
+                        <div class="mega-feature">
+                            <h2 style="margin:0 0 8px">베이스 브랜드 하이라이트</h2>
+                            <p style="margin:0 0 14px; color:var(--footer-text)">대표 브랜드와 추천 모델을 한눈에 살펴보세요. 최신 모델, 사운드 특징, 링크를 제공합니다.</p>
+                            <a class="brand-banner-link" href="#types">전체 모델 보기</a>
+                        </div>
 
-                    <div class="mega-grid">
-                        <a class="mega-item" href="https://www.fender.com/" target="_blank" rel="noopener noreferrer">
-                            <img class="thumb" src="images/fender.svg" alt="Fender logo">
-                            <div class="meta">
-                                <h4>🎸 Fender</h4>
-                                <p>Precision / Jazz 등 전통의 사운드</p>
+                        <div>
+                            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+                                <strong>브랜드 컬렉션</strong>
+                                <small style="color:#666">대표 브랜드를 확인하세요</small>
                             </div>
-                        </a>
-                        <a class="mega-item" href="https://www.ibanez.com/" target="_blank" rel="noopener noreferrer">
-                            <img class="thumb" src="images/ibanez.svg" alt="Ibanez logo">
-                            <div class="meta">
-                                <h4>🎸 Ibanez</h4>
-                                <p>메탈과 모던 톤에 강한 디자인</p>
+                            <div class="mega-grid">
+                                <a class="mega-item" href="https://www.fender.com/" target="_blank" rel="noopener noreferrer">
+                                    <div class="meta">
+                                        <h4>🎸 Fender</h4>
+                                        <p>Precision / Jazz 등 전통의 사운드</p>
+                                    </div>
+                                </a>
+                                <a class="mega-item" href="https://www.ibanez.com/" target="_blank" rel="noopener noreferrer">
+                                    <div class="meta">
+                                        <h4>🎸 Ibanez</h4>
+                                        <p>메탈과 모던 톤에 강한 디자인</p>
+                                    </div>
+                                </a>
+                                <a class="mega-item" href="https://www.music-man.com/" target="_blank" rel="noopener noreferrer">
+                                    <div class="meta">
+                                        <h4>🎸 Music Man</h4>
+                                        <p>액티브 픽업의 강력한 출력</p>
+                                    </div>
+                                </a>
+                                <a class="mega-item" href="https://www.warnersound.com/warwick" target="_blank" rel="noopener noreferrer">
+                                    <div class="meta">
+                                        <h4>🎸 Warwick</h4>
+                                        <p>독일 제작의 깊고 정밀한 저음</p>
+                                    </div>
+                                </a>
+                                <a class="mega-item" href="#types">
+                                    <div class="meta">
+                                        <h4>🎸 기타 브랜드</h4>
+                                        <p>더 많은 브랜드와 모델 보기</p>
+                                    </div>
+                                </a>
+                                <a class="mega-item" href="#about">
+                                    <div class="meta">
+                                        <h4>🎸 소개</h4>
+                                        <p>베이스에 대한 기본 정보</p>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                        <a class="mega-item" href="https://www.music-man.com/" target="_blank" rel="noopener noreferrer">
-                            <img class="thumb" src="images/musicman.svg" alt="Music Man logo">
-                            <div class="meta">
-                                <h4>🎸 Music Man</h4>
-                                <p>액티브 픽업의 강력한 출력</p>
-                            </div>
-                        </a>
-                        <a class="mega-item" href="https://www.warnersound.com/warwick" target="_blank" rel="noopener noreferrer">
-                            <img class="thumb" src="images/warwick.svg" alt="Warwick logo">
-                            <div class="meta">
-                                <h4>🎸 Warwick</h4>
-                                <p>독일 제작의 깊고 정밀한 저음</p>
-                            </div>
-                        </a>
-                            <a class="mega-item" href="#types">
-                                <img class="thumb" src="images/fender.svg" alt="more brands">
-                                <div class="meta">
-                                    <h4>🎸 기타 브랜드</h4>
-                                    <p>더 많은 브랜드와 모델 보기</p>
-                                </div>
-                            </a>
-                            <a class="mega-item" href="#about">
-                                <img class="thumb" src="images/ibanez.svg" alt="about">
-                                <div class="meta">
-                                    <h4>🎸 소개</h4>
-                                    <p>베이스에 대한 기본 정보</p>
-                                </div>
-                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -558,6 +573,8 @@ footer{
         
     </div>
 </header>
+
+<div id="mega-overlay" aria-hidden="true"></div>
 
 <nav>
     <a href="#about">소개</a>
@@ -719,6 +736,7 @@ megaClose && megaClose.addEventListener('click', (e)=>{
     headerInner.classList.remove('open');
     headerInner.setAttribute('aria-expanded','false');
     animateMega(false);
+    document.getElementById('mega-overlay').classList.remove('show');
 });
 
 // Click outside to close on mobile
@@ -743,6 +761,9 @@ let openTimer = null;
 let closeTimer = null;
 const HOVER_OPEN_MS = 120;
 const HOVER_CLOSE_MS = 180;
+// animation timing
+const STAGGER_STEP_MS = 90; // step between staggered items
+const STAGGER_DURATION_MS = 420; // duration of each fadeUp
 
 function handleMouseEnter(){
     if(isMobile()) return;
@@ -750,6 +771,7 @@ function handleMouseEnter(){
     openTimer = setTimeout(()=>{
         headerInner.classList.add('open');
         headerInner.setAttribute('aria-expanded','true');
+        document.getElementById('mega-overlay').classList.add('show');
         animateMega(true);
     }, HOVER_OPEN_MS);
 }
@@ -760,6 +782,7 @@ function handleMouseLeave(){
     closeTimer = setTimeout(()=>{
         headerInner.classList.remove('open');
         headerInner.setAttribute('aria-expanded','false');
+        document.getElementById('mega-overlay').classList.remove('show');
         animateMega(false);
     }, HOVER_CLOSE_MS);
 }
@@ -792,8 +815,8 @@ function animateMega(open){
         inner.classList.add('animate');
         inner.classList.add('open-animated');
         elems.forEach((el,i)=>{
-            el.style.animation = `fadeUp 360ms cubic-bezier(.2,.9,.2,1) both`;
-            el.style.animationDelay = `${i * 80}ms`;
+            el.style.animation = `fadeUp ${STAGGER_DURATION_MS}ms cubic-bezier(.2,.9,.2,1) both`;
+            el.style.animationDelay = `${i * STAGGER_STEP_MS}ms`;
         });
     } else {
         elems.forEach((el)=>{ el.style.animation = ''; el.style.animationDelay = ''; });
