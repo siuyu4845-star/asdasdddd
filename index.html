@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>베이스 기타 소개</title>
+
+<style>
+:root {
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+    --card-bg: white;
+    --header-bg: #222;
+    --header-text: white;
+    --nav-bg: #444;
+    --nav-text: white;
+    --hero-bg: linear-gradient(to right, #444, #666);
+    --hero-text: white;
+    --footer-bg: #222;
+    --footer-text: white;
+    --button-bg: #222;
+    --button-text: white;
+    --button-hover: #ff9800;
+    --shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --card-bg: #1e1e1e;
+    --header-bg: #0d0d0d;
+    --header-text: #ffd54f;
+    --nav-bg: #1a1a1a;
+    --nav-text: #ffd54f;
+    --hero-bg: linear-gradient(to right, #1f1f1f, #2d2d2d);
+    --hero-text: #e0e0e0;
+    --footer-bg: #0d0d0d;
+    --footer-text: #a0a0a0;
+    --button-bg: #ff9800;
+    --button-text: #121212;
+    --button-hover: #ffa726;
+    --shadow: 0 3px 10px rgba(0,0,0,0.5);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+body{
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height:1.6;
+}
+
+header{
+    background: var(--header-bg);
+    color: var(--header-text);
+    text-align:center;
+    padding:30px;
+}
+
+nav{
+    background: var(--nav-bg);
+    text-align:center;
+    padding:10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+nav a{
+    color: var(--nav-text);
+    text-decoration:none;
+    margin:0 15px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#ffd54f;
+}
+
+#theme-toggle {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    padding: 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+#theme-toggle:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+.hero{
+    background: var(--hero-bg);
+    color: var(--hero-text);
+    text-align:center;
+    padding:60px 20px;
+}
+
+.container{
+    width:90%;
+    max-width:1000px;
+    margin:30px auto;
+}
+
+.card{
+    background: var(--card-bg);
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+    box-shadow: var(--shadow);
+}
+
+ul{
+    margin-left:20px;
+}
+
+footer{
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    text-align:center;
+    padding:15px;
+    margin-top:30px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>🎸 베이스 기타 소개</h1>
+    <p>음악의 리듬과 저음을 책임지는 악기</p>
+</header>
+
+<nav>
+    <a href="#about">소개</a>
+    <a href="#types">종류</a>
+    <a href="#features">특징</a>
+    <button id="theme-toggle">🌙 다크 모드</button>
+</nav>
+
+<section class="hero">
+    <h2>베이스는 밴드의 중심입니다.</h2>
+    <p>드럼과 함께 리듬을 만들고 음악의 무게감을 더해줍니다.</p>
+</section>
+
+<div class="container">
+
+    <section id="about" class="card">
+        <h2>베이스 기타란?</h2>
+        <p>
+            베이스 기타는 일반 기타보다 한 옥타브 낮은 음역을 담당하는 악기입니다.
+            주로 4개의 줄을 사용하며, 밴드에서 리듬과 화성을 연결하는 중요한 역할을 합니다.
+        </p>
+    </section>
+
+    <section id="types" class="card">
+        <h2>베이스의 종류</h2>
+        <ul>
+            <li>🎵 4현 베이스</li>
+            <li>🎵 5현 베이스</li>
+            <li>🎵 6현 베이스</li>
+            <li>🎵 프렛리스 베이스</li>
+        </ul>
+    </section>
+
+    <section id="features" class="card">
+        <h2>베이스의 특징</h2>
+        <ul>
+            <li>낮고 묵직한 저음을 연주합니다.</li>
+            <li>드럼과 함께 리듬을 이끕니다.</li>
+            <li>핑거 스타일, 피크, 슬랩 등 다양한 연주법이 있습니다.</li>
+            <li>록, 재즈, 펑크, 팝 등 거의 모든 장르에서 사용됩니다.</li>
+        </ul>
+    </section>
+
+</div>
+
+<footer>
+    <p>© 2026 Bass Guitar Intro | HTML 예제</p>
+</footer>
+
+<div style="text-align:center; margin:30px 0;">
+    <button
+        id="go-to-shop-btn"
+        onclick="window.open('https://bassgosushop.com/', '_blank');"
+        style="
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            padding:15px 30px;
+            font-size:18px;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            transition:0.3s;
+        "
+        onmouseover="this.style.backgroundColor='var(--button-hover)'"
+        onmouseout="this.style.backgroundColor='var(--button-bg)'"
+    >
+        🎸 베이스 고수샵 바로가기
+    </button>
+</div>
+
+<script>
+    const toggleButton = document.getElementById('theme-toggle');
+    
+    // Set initial theme based on preference
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        toggleButton.textContent = '☀️ 라이트 모드';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        toggleButton.textContent = '🌙 다크 모드';
+    }
+
+    // Toggle logic
+    toggleButton.addEventListener('click', () => {
+        let theme = document.documentElement.getAttribute('data-theme');
+        if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+            toggleButton.textContent = '🌙 다크 모드';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            toggleButton.textContent = '☀️ 라이트 모드';
+        }
+    });
+</script>
+
+</body>
