@@ -738,23 +738,36 @@ function isMobile() { return window.matchMedia('(max-width:800px)').matches }
 
 // Toggle open on header click for mobile
 headerInner.addEventListener('click', (e)=>{
-    if(!isMobile()) return;
-    // if click target is a link inside header, ignore
-    if(e.target.closest('a')) return;
-    headerInner.classList.toggle('open');
-    const expanded = headerInner.classList.contains('open');
-    headerInner.setAttribute('aria-expanded', expanded?'true':'false');
-    // overlay + scroll lock for mobile
+    // ignore clicks on interactive elements and inside the mega menu itself
+    if(e.target.closest('.mega-menu') || e.target.closest('a') || e.target.closest('button')) return;
+
     const overlay = document.getElementById('mega-overlay');
-    if(expanded){
-        overlay.classList.add('show');
-        document.body.classList.add('no-scroll');
-    } else {
+    // Mobile: toggle open/close (existing behavior)
+    if(isMobile()){
+        headerInner.classList.toggle('open');
+        const expanded = headerInner.classList.contains('open');
+        headerInner.setAttribute('aria-expanded', expanded?'true':'false');
+        if(expanded){ overlay.classList.add('show'); document.body.classList.add('no-scroll'); }
+        else { overlay.classList.remove('show'); document.body.classList.remove('no-scroll'); }
+        animateMega(expanded);
+        return;
+    }
+
+    // Desktop click: open/close menu fully (show overlay + scroll-lock + animation)
+    const isOpen = headerInner.classList.contains('open');
+    if(isOpen){
+        headerInner.classList.remove('open');
+        headerInner.setAttribute('aria-expanded','false');
         overlay.classList.remove('show');
         document.body.classList.remove('no-scroll');
+        animateMega(false);
+    } else {
+        headerInner.classList.add('open');
+        headerInner.setAttribute('aria-expanded','true');
+        overlay.classList.add('show');
+        document.body.classList.add('no-scroll');
+        animateMega(true);
     }
-    // trigger staggered animation on mobile open
-    animateMega(expanded);
 });
 
 // Close button inside mega-menu for mobile
