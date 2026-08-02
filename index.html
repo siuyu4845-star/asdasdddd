@@ -156,8 +156,8 @@ header{
     z-index: 60;
 }
 
-.logo-wrapper:hover .mega-menu,
-.logo-wrapper:focus-within .mega-menu{
+.header-inner:hover .mega-menu,
+.header-inner:focus-within .mega-menu{
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
@@ -392,6 +392,14 @@ footer{
             </div>
 
             <div class="mega-menu" role="navigation" aria-label="브랜드 메뉴">
+                <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
+                    <a href="#about" style="text-decoration:none; color:inherit; font-weight:600;">소개</a>
+                    <a href="#types" style="text-decoration:none; color:inherit; font-weight:600;">종류</a>
+                    <a href="#features" style="text-decoration:none; color:inherit; font-weight:600;">특징</a>
+                    <div style="margin-left:auto">
+                        <button id="theme-toggle">🌙 라이트모드</button>
+                    </div>
+                </div>
                 <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
                     <strong>브랜드 컬렉션</strong>
                     <small style="color:#666">대표 브랜드를 확인하세요</small>
@@ -443,15 +451,7 @@ footer{
             </div>
         </div>
 
-        <div class="site-title">
-            <h1>🎸 베이스 기타 소개</h1>
-            <p>음악의 리듬과 저음을 책임지는 악기</p>
-        </div>
-
-        <div style="display:flex; align-items:center; gap:14px">
-            <nav style="display:none;">&nbsp;</nav>
-            <button id="theme-toggle">🌙 다크 모드</button>
-        </div>
+        
     </div>
 </header>
 
