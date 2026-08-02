@@ -117,6 +117,8 @@ header{
     right: 0;
     z-index: 10000;
 }
+.header-inner{position:relative;}
+.logo-wrapper{cursor:pointer;}
 
 /* (first duplicate .mega-inner removed) */
 
@@ -752,6 +754,14 @@ const megaMenu = document.querySelector('.mega-menu');
 
 function isMobile() { return window.matchMedia('(max-width:800px)').matches }
 
+// Logo click should refresh the page
+const logoWrapper = document.querySelector('.logo-wrapper');
+logoWrapper && logoWrapper.addEventListener('click', (e)=>{
+    if(e.target.closest('.mega-menu') || e.target.closest('a') || e.target.closest('button')) return;
+    e.stopPropagation();
+    window.location.reload();
+});
+
 // Toggle open on header click for mobile
 headerInner.addEventListener('click', (e)=>{
     // ignore clicks on interactive elements and inside the mega menu itself
@@ -1029,18 +1039,20 @@ document.querySelectorAll('.mega-item').forEach(item=>{
     }
 
     const megaMenuArea = document.querySelector('.mega-menu');
-    function isStillInMenu(target){
-        return megaMenuArea && target && megaMenuArea.contains(target);
+    let menuHover = false;
+    if(megaMenuArea){
+        megaMenuArea.addEventListener('mouseenter', ()=>{ menuHover = true; });
+        megaMenuArea.addEventListener('mouseleave', ()=>{ menuHover = false; restoreDefault(); setTimeout(()=>startAutoCycle(), 500); });
     }
-    item.addEventListener('mouseenter', (e)=>{ stopAutoCycle(); showPreview(); });
+    item.addEventListener('mouseenter', (e)=>{ stopAutoCycle(); menuHover = true; showPreview(); });
     item.addEventListener('focus', (e)=>{ stopAutoCycle(); showPreview(); });
     item.addEventListener('mouseleave', (e)=>{
-        if(isStillInMenu(e.relatedTarget)) return;
+        if(menuHover) return;
         restoreDefault();
         setTimeout(()=>startAutoCycle(), 500);
     });
     item.addEventListener('blur', (e)=>{
-        if(isStillInMenu(e.relatedTarget)) return;
+        if(menuHover) return;
         restoreDefault();
         setTimeout(()=>startAutoCycle(), 500);
     });
