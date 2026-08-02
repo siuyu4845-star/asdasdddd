@@ -138,10 +138,9 @@ header{
 /* Mega menu that drops down when hovering the logo-wrapper */
 
 .mega-menu{
-    /* make the menu fixed so it overlays page content reliably */
-    position: fixed;
+    position: absolute;
     left: 0;
-    top: 76px; /* directly under the fixed header */
+    top: 100%; /* attached directly below the fixed header */
     width: 100vw;
     background: transparent; /* inner panel handles background */
     padding: 0 12px;
@@ -938,10 +937,8 @@ function animateMega(open){
     const inner = document.querySelector('.mega-inner');
     if(!inner) return;
     // build a stable order: links row first, then each mega-item: img, h4, p
-    const linkEls = Array.from(inner.querySelectorAll('.mega-links a'));
     const itemEls = Array.from(inner.querySelectorAll('.mega-item'));
     let elems = [];
-    elems = elems.concat(linkEls);
     itemEls.forEach(item=>{
         const img = item.querySelector('img.thumb');
         const h4 = item.querySelector('.meta h4');
@@ -1031,19 +1028,19 @@ document.querySelectorAll('.mega-item').forEach(item=>{
         if(featureP) featureP.innerText = '대표 브랜드와 추천 모델을 한눈에 살펴보세요. 최신 모델, 사운드 특징, 링크를 제공합니다.';
     }
 
-    const megaGrid = document.querySelector('.mega-grid');
-    function isStillInGrid(target){
-        return megaGrid && target && megaGrid.contains(target);
+    const megaMenuArea = document.querySelector('.mega-menu');
+    function isStillInMenu(target){
+        return megaMenuArea && target && megaMenuArea.contains(target);
     }
     item.addEventListener('mouseenter', (e)=>{ stopAutoCycle(); showPreview(); });
     item.addEventListener('focus', (e)=>{ stopAutoCycle(); showPreview(); });
     item.addEventListener('mouseleave', (e)=>{
-        if(isStillInGrid(e.relatedTarget)) return;
+        if(isStillInMenu(e.relatedTarget)) return;
         restoreDefault();
         setTimeout(()=>startAutoCycle(), 500);
     });
     item.addEventListener('blur', (e)=>{
-        if(isStillInGrid(e.relatedTarget)) return;
+        if(isStillInMenu(e.relatedTarget)) return;
         restoreDefault();
         setTimeout(()=>startAutoCycle(), 500);
     });
