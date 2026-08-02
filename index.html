@@ -292,6 +292,11 @@ header{
     .mega-close{display:block; text-align:right; width:100%; padding:6px 0}
 }
 
+/* hide the top nav links on desktop to avoid duplicate '소개/종류/특징' before the banner opens */
+@media (min-width: 801px){
+    nav{display:none}
+}
+
 .mega-item{
     display:flex;
     gap:12px;
@@ -788,8 +793,8 @@ window.addEventListener('resize', ()=>{
 // Desktop: add small hover delay like Apple for smooth open/close
 let openTimer = null;
 let closeTimer = null;
-const HOVER_OPEN_MS = 120;
-const HOVER_CLOSE_MS = 180;
+const HOVER_OPEN_MS = 160; // slightly increased to avoid accidental opens
+const HOVER_CLOSE_MS = 320; // increase close delay to prevent flicker when moving pointer
 // animation timing
 const STAGGER_STEP_MS = 90; // step between staggered items
 const STAGGER_DURATION_MS = 420; // duration of each fadeUp
@@ -800,8 +805,7 @@ function handleMouseEnter(){
     openTimer = setTimeout(()=>{
         headerInner.classList.add('open');
         headerInner.setAttribute('aria-expanded','true');
-        document.getElementById('mega-overlay').classList.add('show');
-        document.body.classList.add('no-scroll');
+        // do not show overlay on desktop hover (prevents darkening)
         animateMega(true);
     }, HOVER_OPEN_MS);
 }
@@ -812,8 +816,7 @@ function handleMouseLeave(){
     closeTimer = setTimeout(()=>{
         headerInner.classList.remove('open');
         headerInner.setAttribute('aria-expanded','false');
-        document.getElementById('mega-overlay').classList.remove('show');
-        document.body.classList.remove('no-scroll');
+        // do not toggle overlay on hover close
         animateMega(false);
     }, HOVER_CLOSE_MS);
 }
