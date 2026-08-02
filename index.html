@@ -114,22 +114,7 @@ header{
     z-index: 10000;
 }
 
-.mega-inner{
-    width: 70vw;
-    max-width: 1400px;
-    min-width: 420px;
-    margin: 0 auto;
-    background: var(--header-bg);
-    color: var(--header-text);
-    border-radius:14px;
-    box-shadow: 0 30px 60px rgba(15,20,30,0.12);
-    padding:20px 32px;
-    border: 1px solid var(--border);
-    display:flex;
-    flex-direction:column;
-    justify-content:center; /* vertically center content */
-    align-items:stretch;
-}
+/* (first duplicate .mega-inner removed) */
 
 .logo {
     width:44px;
@@ -153,7 +138,7 @@ header{
     left: 0;
     top: 100%;
     width: 100vw;
-    background: rgba(255,255,255,0.7);
+    background: var(--header-bg);
     backdrop-filter: blur(8px);
     padding: 0 12px;
     transform: translateY(-10px);
@@ -214,6 +199,18 @@ header{
 @keyframes megaDrop{
     from { transform: translateY(-8px); opacity: 0 }
     to   { transform: translateY(0); opacity: 1 }
+}
+
+@keyframes fadeUp{
+    from { opacity: 0; transform: translateY(8px) }
+    to   { opacity: 1; transform: translateY(0) }
+}
+
+.mega-inner.animate .mega-links a,
+.mega-inner.animate .mega-item .meta h4,
+.mega-inner.animate .mega-item .meta p{
+    opacity: 0;
+    transform: translateY(8px);
 }
 
 .header-inner:hover .mega-menu,
@@ -706,6 +703,8 @@ headerInner.addEventListener('click', (e)=>{
     headerInner.classList.toggle('open');
     const expanded = headerInner.classList.contains('open');
     headerInner.setAttribute('aria-expanded', expanded?'true':'false');
+    // trigger staggered animation on mobile open
+    animateMega(expanded);
 });
 
 // Close button inside mega-menu for mobile
@@ -713,6 +712,7 @@ megaClose && megaClose.addEventListener('click', (e)=>{
     e.stopPropagation();
     headerInner.classList.remove('open');
     headerInner.setAttribute('aria-expanded','false');
+    animateMega(false);
 });
 
 // Click outside to close on mobile
@@ -744,6 +744,7 @@ function handleMouseEnter(){
     openTimer = setTimeout(()=>{
         headerInner.classList.add('open');
         headerInner.setAttribute('aria-expanded','true');
+        animateMega(true);
     }, HOVER_OPEN_MS);
 }
 
@@ -753,12 +754,31 @@ function handleMouseLeave(){
     closeTimer = setTimeout(()=>{
         headerInner.classList.remove('open');
         headerInner.setAttribute('aria-expanded','false');
+        animateMega(false);
     }, HOVER_CLOSE_MS);
 }
 
 headerInner.addEventListener('mouseenter', handleMouseEnter);
 headerInner.addEventListener('mouseleave', handleMouseLeave);
 
+</script>
+<script>
+// animateMega: stagger reveal for links and meta text
+function animateMega(open){
+    const inner = document.querySelector('.mega-inner');
+    if(!inner) return;
+    const elems = Array.from(inner.querySelectorAll('.mega-links a, .mega-item .meta h4, .mega-item .meta p'));
+    if(open){
+        inner.classList.add('animate');
+        elems.forEach((el,i)=>{
+            el.style.animation = `fadeUp 360ms cubic-bezier(.2,.9,.2,1) both`;
+            el.style.animationDelay = `${i * 80}ms`;
+        });
+    } else {
+        elems.forEach((el)=>{ el.style.animation = ''; el.style.animationDelay = ''; });
+        inner.classList.remove('animate');
+    }
+}
 </script>
 <script>
 
