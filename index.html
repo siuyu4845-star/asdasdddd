@@ -754,40 +754,24 @@ headerInner.addEventListener('click', (e)=>{
     }
 
     // Desktop click: open/close menu fully (show overlay + scroll-lock + animation)
-    const isOpen = headerInner.classList.contains('open');
-    if(isOpen){
-        headerInner.classList.remove('open');
-        headerInner.setAttribute('aria-expanded','false');
-        overlay.classList.remove('show');
-        document.body.classList.remove('no-scroll');
-        animateMega(false);
+    if(headerInner.classList.contains('open')){
+        closeMenu();
     } else {
-        headerInner.classList.add('open');
-        headerInner.setAttribute('aria-expanded','true');
-        overlay.classList.add('show');
-        document.body.classList.add('no-scroll');
-        animateMega(true);
+        openMenu({ withOverlay:true });
     }
 });
 
 // Close button inside mega-menu for mobile
 megaClose && megaClose.addEventListener('click', (e)=>{
     e.stopPropagation();
-    headerInner.classList.remove('open');
-    headerInner.setAttribute('aria-expanded','false');
-    animateMega(false);
-    document.getElementById('mega-overlay').classList.remove('show');
-    document.body.classList.remove('no-scroll');
+    closeMenu();
 });
 
 // Click outside to close on mobile
 document.addEventListener('click', (e)=>{
     if(!isMobile()) return;
     if(headerInner.contains(e.target)) return;
-    headerInner.classList.remove('open');
-    headerInner.setAttribute('aria-expanded','false');
-    document.getElementById('mega-overlay').classList.remove('show');
-    document.body.classList.remove('no-scroll');
+    closeMenu();
 });
 
 // Ensure aria state on resize
@@ -802,32 +786,69 @@ window.addEventListener('resize', ()=>{
 // Desktop: add small hover delay like Apple for smooth open/close
 let openTimer = null;
 let closeTimer = null;
-const HOVER_OPEN_MS = 200; // slightly increased to avoid accidental opens
-const HOVER_CLOSE_MS = 700; // increased more to prevent flicker when moving pointer between header and menu
+const HOVER_OPEN_MS = 200; // delay before opening on hover/click
+const HOVER_CLOSE_MS = 700; // only close after pointer leaves below the menu for this duration
 // animation timing
 const STAGGER_STEP_MS = 90; // step between staggered items
 const STAGGER_DURATION_MS = 420; // duration of each fadeUp
 
+// Pointer watch state for desktop: only close when pointer goes below menu
+let pointerWatchActive = false;
+function desktopPointerMove(e){
+    const menu = document.querySelector('.mega-menu');
+    if(!menu) return;
+    const rect = menu.getBoundingClientRect();
+    // if pointer is below the bottom of the menu (plus small hysteresis), start close timer
+    if(e.clientY > rect.bottom + 6){
+        if(!closeTimer){
+            closeTimer = setTimeout(()=>{ closeMenu(); }, HOVER_CLOSE_MS);
+        }
+    } else {
+        // pointer is within or above menu; cancel close
+        if(closeTimer){ clearTimeout(closeTimer); closeTimer = null; }
+    }
+}
+
+function startPointerWatch(){
+    if(pointerWatchActive) return;
+    document.addEventListener('mousemove', desktopPointerMove);
+    pointerWatchActive = true;
+}
+
+function stopPointerWatch(){
+    if(!pointerWatchActive) return;
+    document.removeEventListener('mousemove', desktopPointerMove);
+    pointerWatchActive = false;
+    if(closeTimer){ clearTimeout(closeTimer); closeTimer = null; }
+}
+
+function openMenu({withOverlay=false} = {}){
+    headerInner.classList.add('open');
+    headerInner.setAttribute('aria-expanded','true');
+    animateMega(true);
+    startPointerWatch();
+    if(withOverlay){ document.getElementById('mega-overlay').classList.add('show'); document.body.classList.add('no-scroll'); }
+}
+
+function closeMenu(){
+    headerInner.classList.remove('open');
+    headerInner.setAttribute('aria-expanded','false');
+    animateMega(false);
+    stopPointerWatch();
+    document.getElementById('mega-overlay').classList.remove('show');
+    document.body.classList.remove('no-scroll');
+}
+
 function handleMouseEnter(){
     if(isMobile()) return;
     clearTimeout(closeTimer);
-    openTimer = setTimeout(()=>{
-        headerInner.classList.add('open');
-        headerInner.setAttribute('aria-expanded','true');
-        // do not show overlay on desktop hover (prevents darkening)
-        animateMega(true);
-    }, HOVER_OPEN_MS);
+    openTimer = setTimeout(()=>{ openMenu({ withOverlay:false }); }, HOVER_OPEN_MS);
 }
 
 function handleMouseLeave(){
+    // keep for compatibility but actual close will be handled by pointer watch
     if(isMobile()) return;
     clearTimeout(openTimer);
-    closeTimer = setTimeout(()=>{
-        headerInner.classList.remove('open');
-        headerInner.setAttribute('aria-expanded','false');
-        // do not toggle overlay on hover close
-        animateMega(false);
-    }, HOVER_CLOSE_MS);
 }
 
 headerInner.addEventListener('mouseenter', handleMouseEnter);
@@ -836,31 +857,18 @@ headerInner.addEventListener('mouseleave', handleMouseLeave);
 megaMenu && megaMenu.addEventListener('mouseenter', (e)=>{
     if(isMobile()) return;
     clearTimeout(closeTimer);
-    headerInner.classList.add('open');
-    headerInner.setAttribute('aria-expanded','true');
-    document.getElementById('mega-overlay').classList.add('show');
-    animateMega(true);
+    openMenu({ withOverlay:false });
 });
 megaMenu && megaMenu.addEventListener('mouseleave', (e)=>{
     if(isMobile()) return;
-    // start close timer when leaving mega menu
+    // don't immediately close here; pointer watch will detect when pointer goes below menu
     clearTimeout(openTimer);
-    closeTimer = setTimeout(()=>{
-        headerInner.classList.remove('open');
-        headerInner.setAttribute('aria-expanded','false');
-        document.getElementById('mega-overlay').classList.remove('show');
-        animateMega(false);
-    }, HOVER_CLOSE_MS);
 });
 
 // overlay click should close the menu
 const overlayEl = document.getElementById('mega-overlay');
 overlayEl && overlayEl.addEventListener('click', ()=>{
-    headerInner.classList.remove('open');
-    headerInner.setAttribute('aria-expanded','false');
-    document.getElementById('mega-overlay').classList.remove('show');
-    document.body.classList.remove('no-scroll');
-    animateMega(false);
+    closeMenu();
 });
 
 </script>
