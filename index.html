@@ -958,6 +958,38 @@ document.querySelectorAll('.mega-links a').forEach(a=>{
     });
 });
 
+// Show brand preview in the left feature panel when hovering/focusing any brand item
+document.querySelectorAll('.mega-item').forEach(item=>{
+    // make focusable for keyboard users
+    item.setAttribute('tabindex','0');
+    const metaH4 = item.querySelector('.meta h4');
+    const metaP = item.querySelector('.meta p');
+    const titleText = metaH4 ? metaH4.innerText : '';
+    const descText = metaP ? metaP.innerText : '';
+
+    function showPreview(){
+        const featureTitle = document.querySelector('.mega-feature h2');
+        const featureP = document.querySelector('.mega-feature p');
+        if(featureTitle) featureTitle.innerText = titleText.replace(/^🎸\s*/,'');
+        if(featureP) featureP.innerText = descText;
+        // small visual cue
+        const feature = document.querySelector('.mega-feature');
+        if(feature){ feature.classList.add('flash-highlight'); setTimeout(()=>feature.classList.remove('flash-highlight'), 900); }
+    }
+
+    function restoreDefault(){
+        const featureTitle = document.querySelector('.mega-feature h2');
+        const featureP = document.querySelector('.mega-feature p');
+        if(featureTitle) featureTitle.innerText = '베이스 브랜드 하이라이트';
+        if(featureP) featureP.innerText = '대표 브랜드와 추천 모델을 한눈에 살펴보세요. 최신 모델, 사운드 특징, 링크를 제공합니다.';
+    }
+
+    item.addEventListener('mouseenter', showPreview);
+    item.addEventListener('focus', showPreview);
+    item.addEventListener('mouseleave', restoreDefault);
+    item.addEventListener('blur', restoreDefault);
+});
+
 
 const items = document.querySelectorAll(".scroll-item");
 
