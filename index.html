@@ -212,7 +212,6 @@ header{
     to   { opacity: 1; transform: translateY(0) }
 }
 
-.mega-inner.animate .mega-links a,
 .mega-inner.animate .mega-item img.thumb,
 .mega-inner.animate .mega-item .meta h4,
 .mega-inner.animate .mega-item .meta p{
@@ -268,6 +267,10 @@ header{
 .mega-item{padding:14px 12px}
 .mega-item .meta h4, .mega-item .meta p{line-height:1.15; margin:0}
 .mega-links a{display:inline-flex; align-items:center; padding:0 10px; line-height:1; height:44px}
+
+/* click animation for banner links */
+.mega-links a.click-animate{animation: linkClick 220ms cubic-bezier(.2,.9,.2,1) both}
+@keyframes linkClick{from{transform:translateY(0);opacity:1}to{transform:translateY(-8px);opacity:.85}}
 
 /* ensure theme toggle lines up */
 #theme-toggle{height:36px; display:inline-flex; align-items:center;}
@@ -993,11 +996,15 @@ document.querySelectorAll('.mega-links a').forEach(a=>{
         e.preventDefault();
         const target = document.querySelector(href);
         if(!target) return;
-        // close menu, then smooth scroll
-        closeMenu();
+        // play small click animation, then close menu and scroll
+        a.classList.add('click-animate');
         setTimeout(()=>{
-            target.scrollIntoView({behavior:'smooth', block:'start'});
-        }, 220);
+            a.classList.remove('click-animate');
+            closeMenu();
+            setTimeout(()=>{
+                target.scrollIntoView({behavior:'smooth', block:'start'});
+            }, 180);
+        }, 200);
     });
 });
 
