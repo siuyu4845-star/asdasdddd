@@ -153,13 +153,25 @@ header{
     left: 0;
     top: 100%;
     width: 100vw;
-    background: transparent;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px);
     padding: 0 12px;
     transform: translateY(-10px);
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
     transition: transform 0.35s cubic-bezier(.2,.9,.2,1), opacity 0.28s ease, visibility 0.28s;
     z-index: 11000; /* ensure banner sits above other page content */
+}
+
+/* show state via hover OR .open class (used by JS for delayed open) */
+.header-inner.open .mega-menu,
+.header-inner:hover .mega-menu,
+.header-inner:focus-within .mega-menu{
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .mega-inner{
@@ -718,6 +730,35 @@ window.addEventListener('resize', ()=>{
         headerInner.setAttribute('aria-expanded','false');
     }
 });
+</script>
+<script>
+// Desktop: add small hover delay like Apple for smooth open/close
+let openTimer = null;
+let closeTimer = null;
+const HOVER_OPEN_MS = 120;
+const HOVER_CLOSE_MS = 180;
+
+function handleMouseEnter(){
+    if(isMobile()) return;
+    clearTimeout(closeTimer);
+    openTimer = setTimeout(()=>{
+        headerInner.classList.add('open');
+        headerInner.setAttribute('aria-expanded','true');
+    }, HOVER_OPEN_MS);
+}
+
+function handleMouseLeave(){
+    if(isMobile()) return;
+    clearTimeout(openTimer);
+    closeTimer = setTimeout(()=>{
+        headerInner.classList.remove('open');
+        headerInner.setAttribute('aria-expanded','false');
+    }, HOVER_CLOSE_MS);
+}
+
+headerInner.addEventListener('mouseenter', handleMouseEnter);
+headerInner.addEventListener('mouseleave', handleMouseLeave);
+
 </script>
 <script>
 
