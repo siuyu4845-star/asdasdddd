@@ -207,6 +207,7 @@ header{
 }
 
 .mega-inner.animate .mega-links a,
+.mega-inner.animate .mega-item img.thumb,
 .mega-inner.animate .mega-item .meta h4,
 .mega-inner.animate .mega-item .meta p{
     opacity: 0;
@@ -469,6 +470,11 @@ footer{
 }
 </style>
 
+<style>
+/* ensure anchor jumps account for fixed header */
+#about, #types, #features { scroll-margin-top: 92px; }
+</style>
+
 </head>
 <body>
 
@@ -505,45 +511,45 @@ footer{
                         <a class="mega-item" href="https://www.fender.com/" target="_blank" rel="noopener noreferrer">
                             <img class="thumb" src="images/fender.svg" alt="Fender logo">
                             <div class="meta">
-                                <h4>Fender</h4>
+                                <h4>🎸 Fender</h4>
                                 <p>Precision / Jazz 등 전통의 사운드</p>
                             </div>
                         </a>
                         <a class="mega-item" href="https://www.ibanez.com/" target="_blank" rel="noopener noreferrer">
                             <img class="thumb" src="images/ibanez.svg" alt="Ibanez logo">
                             <div class="meta">
-                                <h4>Ibanez</h4>
+                                <h4>🎸 Ibanez</h4>
                                 <p>메탈과 모던 톤에 강한 디자인</p>
                             </div>
                         </a>
                         <a class="mega-item" href="https://www.music-man.com/" target="_blank" rel="noopener noreferrer">
                             <img class="thumb" src="images/musicman.svg" alt="Music Man logo">
                             <div class="meta">
-                                <h4>Music Man</h4>
+                                <h4>🎸 Music Man</h4>
                                 <p>액티브 픽업의 강력한 출력</p>
                             </div>
                         </a>
                         <a class="mega-item" href="https://www.warnersound.com/warwick" target="_blank" rel="noopener noreferrer">
                             <img class="thumb" src="images/warwick.svg" alt="Warwick logo">
                             <div class="meta">
-                                <h4>Warwick</h4>
+                                <h4>🎸 Warwick</h4>
                                 <p>독일 제작의 깊고 정밀한 저음</p>
                             </div>
                         </a>
-                        <a class="mega-item" href="#types">
-                            <img class="thumb" src="images/fender.svg" alt="more brands">
-                            <div class="meta">
-                                <h4>기타 브랜드</h4>
-                                <p>더 많은 브랜드와 모델 보기</p>
-                            </div>
-                        </a>
-                        <a class="mega-item" href="#about">
-                            <img class="thumb" src="images/ibanez.svg" alt="about">
-                            <div class="meta">
-                                <h4>소개</h4>
-                                <p>베이스에 대한 기본 정보</p>
-                            </div>
-                        </a>
+                            <a class="mega-item" href="#types">
+                                <img class="thumb" src="images/fender.svg" alt="more brands">
+                                <div class="meta">
+                                    <h4>🎸 기타 브랜드</h4>
+                                    <p>더 많은 브랜드와 모델 보기</p>
+                                </div>
+                            </a>
+                            <a class="mega-item" href="#about">
+                                <img class="thumb" src="images/ibanez.svg" alt="about">
+                                <div class="meta">
+                                    <h4>🎸 소개</h4>
+                                    <p>베이스에 대한 기본 정보</p>
+                                </div>
+                            </a>
                     </div>
                 </div>
             </div>
@@ -767,9 +773,24 @@ headerInner.addEventListener('mouseleave', handleMouseLeave);
 function animateMega(open){
     const inner = document.querySelector('.mega-inner');
     if(!inner) return;
-    const elems = Array.from(inner.querySelectorAll('.mega-links a, .mega-item .meta h4, .mega-item .meta p'));
+    // build a stable order: links row first, then each mega-item: img, h4, p
+    const linkEls = Array.from(inner.querySelectorAll('.mega-links a'));
+    const itemEls = Array.from(inner.querySelectorAll('.mega-item'));
+    let elems = [];
+    elems = elems.concat(linkEls);
+    itemEls.forEach(item=>{
+        const img = item.querySelector('img.thumb');
+        const h4 = item.querySelector('.meta h4');
+        const p = item.querySelector('.meta p');
+        if(img) elems.push(img);
+        if(h4) elems.push(h4);
+        if(p) elems.push(p);
+    });
+
     if(open){
+        if(inner.classList.contains('open-animated')) return; // avoid re-trigger
         inner.classList.add('animate');
+        inner.classList.add('open-animated');
         elems.forEach((el,i)=>{
             el.style.animation = `fadeUp 360ms cubic-bezier(.2,.9,.2,1) both`;
             el.style.animationDelay = `${i * 80}ms`;
@@ -777,6 +798,7 @@ function animateMega(open){
     } else {
         elems.forEach((el)=>{ el.style.animation = ''; el.style.animationDelay = ''; });
         inner.classList.remove('animate');
+        inner.classList.remove('open-animated');
     }
 }
 </script>
