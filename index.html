@@ -212,6 +212,9 @@ header{
 .mega-inner.animate .mega-item .meta p{
     opacity: 0;
     transform: translateY(8px);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform-origin: 50% 50%;
 }
 
 .header-inner:hover .mega-menu,
@@ -228,6 +231,7 @@ header{
     margin-bottom:12px;
     position:relative;
     top:0; /* reset offset to be symmetric */
+    padding:6px 0; /* ensure symmetric vertical space */
 }
 
 .mega-menu a{color:inherit; text-decoration:none}
@@ -253,6 +257,14 @@ header{
 
 /* remove left thumbnail space by making items compact */
 .mega-item{padding:14px 12px}
+.mega-item .meta h4, .mega-item .meta p{line-height:1.15; margin:0}
+.mega-links a{display:inline-flex; align-items:center; padding:6px 8px; line-height:1}
+
+/* ensure theme toggle lines up */
+#theme-toggle{height:36px; display:inline-flex; align-items:center;}
+
+/* prevent animated elements causing layout reflow */
+.mega-inner{overflow:hidden}
 .mega-item .meta h4{font-size:1.02rem}
 
 .mega-item img.thumb{
