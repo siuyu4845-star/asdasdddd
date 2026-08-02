@@ -996,15 +996,12 @@ document.querySelectorAll('.mega-links a').forEach(a=>{
         e.preventDefault();
         const target = document.querySelector(href);
         if(!target) return;
-        // play small click animation, then close menu and scroll
         a.classList.add('click-animate');
-        setTimeout(()=>{
-            a.classList.remove('click-animate');
-            closeMenu();
-            setTimeout(()=>{
-                target.scrollIntoView({behavior:'smooth', block:'start'});
-            }, 180);
-        }, 200);
+        closeMenu();
+        requestAnimationFrame(()=>{
+            target.scrollIntoView({behavior:'smooth', block:'start'});
+            setTimeout(()=> a.classList.remove('click-animate'), 180);
+        });
     });
 });
 
@@ -1034,10 +1031,22 @@ document.querySelectorAll('.mega-item').forEach(item=>{
         if(featureP) featureP.innerText = '대표 브랜드와 추천 모델을 한눈에 살펴보세요. 최신 모델, 사운드 특징, 링크를 제공합니다.';
     }
 
+    const megaGrid = document.querySelector('.mega-grid');
+    function isStillInGrid(target){
+        return megaGrid && target && megaGrid.contains(target);
+    }
     item.addEventListener('mouseenter', (e)=>{ stopAutoCycle(); showPreview(); });
     item.addEventListener('focus', (e)=>{ stopAutoCycle(); showPreview(); });
-    item.addEventListener('mouseleave', (e)=>{ restoreDefault(); setTimeout(()=>startAutoCycle(), 500); });
-    item.addEventListener('blur', (e)=>{ restoreDefault(); setTimeout(()=>startAutoCycle(), 500); });
+    item.addEventListener('mouseleave', (e)=>{
+        if(isStillInGrid(e.relatedTarget)) return;
+        restoreDefault();
+        setTimeout(()=>startAutoCycle(), 500);
+    });
+    item.addEventListener('blur', (e)=>{
+        if(isStillInGrid(e.relatedTarget)) return;
+        restoreDefault();
+        setTimeout(()=>startAutoCycle(), 500);
+    });
 });
 
 // Keyboard navigation: arrow up/down to move between brand items when menu is open
