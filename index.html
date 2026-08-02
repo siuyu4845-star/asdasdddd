@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>베이스 기타 소개</title>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
     --bg-color: #f4f4f4;
@@ -46,14 +48,21 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 body{
     background: var(--bg-color);
     color: var(--text-color);
-    line-height:1.6;
+    line-height:1.7;
+    letter-spacing: -0.02em;
+}
+
+h1, h2, h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
 }
 
 header{
@@ -77,7 +86,8 @@ nav a{
     color: var(--nav-text);
     text-decoration:none;
     margin:0 15px;
-    font-weight:bold;
+    font-weight:600;
+    font-size: 0.95rem;
 }
 
 nav a:hover{
@@ -239,5 +249,451 @@ footer{
         }
     });
 </script>
+<script>
+
+const items = document.querySelectorAll(".scroll-item");
+
+
+const observer = new IntersectionObserver(
+(entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},
+{
+    threshold:0.15
+});
+
+
+items.forEach(item=>{
+
+    observer.observe(item);
+
+});
+
+</script>
+</body>
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BASS 브랜드 소개</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #f5f5f5;
+        color: #222;
+        line-height: 1.6;
+    }
+
+    header {
+        background: linear-gradient(135deg, #111, #444);
+        color: white;
+        padding: 60px 20px;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 48px;
+        margin-bottom: 10px;
+    }
+
+    header p {
+        font-size: 20px;
+        color: #ddd;
+    }
+
+    nav {
+        background: #222;
+        padding: 15px;
+        text-align: center;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+    }
+
+    nav a:hover {
+        color: #ff9800;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        margin: 40px auto;
+    }
+
+    .brand {
+        background: white;
+        padding: 30px;
+        margin-bottom: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .brand h2 {
+        color: #ff9800;
+        margin-bottom: 15px;
+    }
+
+    .brand p {
+        margin-bottom: 15px;
+    }
+
+    .models {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        flex: 1;
+        min-width: 250px;
+        background: #222;
+        color: white;
+        padding: 25px;
+        border-radius: 12px;
+    }
+
+    .card h3 {
+        color: #ff9800;
+        margin-bottom: 10px;
+    }
+
+    footer {
+        background: #111;
+        color: white;
+        text-align: center;
+        padding: 25px;
+        margin-top: 50px;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 30px;
+        background: #ff9800;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background: #e68900;
+    }
+    /* =========================
+   Animation Effects
+========================= */
+
+/* 페이지 시작 시 히어로 등장 */
+.hero-animation {
+    animation: fadeDown 1.2s ease-out;
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* 스크롤 등장 기본 상태 */
+.scroll-item {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: 
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+
+/* 화면에 들어왔을 때 */
+.scroll-item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* 브랜드 카드 Hover 효과 */
+.card {
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+
+.card:hover {
+
+    transform:
+        translateY(-15px)
+        scale(1.03);
+
+    box-shadow:
+        0 15px 35px rgba(255,152,0,0.35);
+
+}
+
+
+/* 브랜드 박스 Hover */
+
+.brand {
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+
+}
+
+
+.brand:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.2);
+
+}
+
+
+/* 버튼 빛나는 효과 */
+
+button {
+
+    position: relative;
+    overflow: hidden;
+
+}
+
+
+button::after {
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:100%;
+    height:100%;
+
+    background:
+    linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.6),
+        transparent
+    );
+
+    transition:0.5s;
+
+}
+
+
+button:hover::after {
+
+    left:100%;
+
+}
+
+
+/* 베이스 사이트 느낌의 네온 효과 */
+
+.card h3 {
+
+    text-shadow:
+    0 0 10px rgba(255,152,0,0.6);
+
+}
+
+
+/* 이미지 확대 효과 */
+
+.brand img {
+
+    transition:
+    transform 0.5s ease;
+
+}
+
+
+.brand:hover img {
+
+    transform:
+    scale(1.08);
+
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>BASS GUITAR</h1>
+    <p>저음으로 음악을 완성하는 최고의 브랜드들</p>
+</header>
+
+
+<nav>
+    <a href="#fender">Fender</a>
+    <a href="#ibanez">Ibanez</a>
+    <a href="#musicman">Music Man</a>
+    <a href="#warwick">Warwick</a>
+</nav>
+
+
+<div class="container">
+
+
+<section class="brand" id="fender">
+
+<h2>Fender</h2>
+
+<p>
+1946년 설립된 Fender는 일렉트릭 기타와 베이스 역사에서
+가장 영향력 있는 브랜드 중 하나입니다.
+</p>
+
+<p>
+대표 모델인 Precision Bass와 Jazz Bass는
+수많은 뮤지션들이 사용하는 클래식 베이스입니다.
+</p>
+
+<div class="models">
+
+<div class="card">
+<h3>Precision Bass</h3>
+<p>
+강력한 저음과 두꺼운 사운드.
+록과 팝 음악에서 사랑받는 모델.
+</p>
+</div>
+
+<div class="card">
+<h3>Jazz Bass</h3>
+<p>
+밝고 선명한 톤.
+펑크, 재즈, 세션 연주에 적합.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<section class="brand" id="ibanez">
+
+<h2>Ibanez</h2>
+
+<p>
+Ibanez는 빠른 연주성과 현대적인 디자인으로
+메탈과 퓨전 장르에서 인기가 높은 브랜드입니다.
+</p>
+
+<div class="models">
+
+<div class="card">
+<h3>SR Series</h3>
+<p>
+얇은 넥과 뛰어난 연주감이 특징.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<section class="brand" id="musicman">
+
+<h2>Music Man</h2>
+
+<p>
+Music Man StingRay는 강력한 액티브 사운드와
+독특한 디자인으로 유명합니다.
+</p>
+
+</section>
+
+
+
+<section class="brand" id="warwick">
+
+<h2>Warwick</h2>
+
+<p>
+독일 프리미엄 베이스 브랜드.
+정밀한 제작과 깊은 톤으로 유명합니다.
+</p>
+
+</section>
+
+
+<button onclick="changeTheme()">
+테마 변경
+</button>
+
+
+</div>
+
+
+<footer>
+<p>
+© 2026 Bass Brand Introduction
+</p>
+</footer>
+
+
+<script>
+
+function changeTheme(){
+
+    document.body.style.background =
+    document.body.style.background === "black"
+    ? "#f5f5f5"
+    : "black";
+
+    document.body.style.color =
+    document.body.style.color === "white"
+    ? "#222"
+    : "white";
+
+}
+
+</script>
+
 
 </body>
+</html>
