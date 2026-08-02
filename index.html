@@ -6,50 +6,73 @@
 <title>베이스 기타 소개</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-    --bg-color: #f4f4f4;
-    --text-color: #333;
-    --card-bg: white;
-    --header-bg: #222;
-    --header-text: white;
-    --nav-bg: #444;
-    --nav-text: white;
-    --hero-bg: linear-gradient(to right, #444, #666);
-    --hero-text: white;
-    --footer-bg: #222;
-    --footer-text: white;
-    --button-bg: #222;
-    --button-text: white;
-    --button-hover: #ff9800;
-    --shadow: 0 3px 10px rgba(0,0,0,0.1);
+    --bg-color: #f5f5f7;
+    --text-color: #1d1d1f;
+    --card-bg: rgba(255,255,255,0.92);
+    --header-bg: rgba(255,255,255,0.78);
+    --header-text: #1d1d1f;
+    --nav-bg: rgba(255,255,255,0.72);
+    --nav-text: #1d1d1f;
+    --hero-bg: linear-gradient(135deg, #f7f7f7 0%, #e8ebf0 100%);
+    --hero-text: #1d1d1f;
+    --footer-bg: #f5f5f7;
+    --footer-text: #6e6e73;
+    --button-bg: #0071e3;
+    --button-text: #ffffff;
+    --button-hover: #0077ed;
+    --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    --border: rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] {
+    --bg-color: #f5f5f7;
+    --text-color: #111111;
+    --card-bg: #ffffff;
+    --header-bg: #ffffff;
+    --header-text: #111111;
+    --nav-bg: #ffffff;
+    --nav-text: #111111;
+    --hero-bg: linear-gradient(135deg, #f7f7f7 0%, #ece7df 100%);
+    --hero-text: #111111;
+    --footer-bg: #f3efe8;
+    --footer-text: #4f493f;
+    --button-bg: #0071e3;
+    --button-text: #ffffff;
+    --button-hover: #0077ed;
+    --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    --border: rgba(0,0,0,0.06);
 }
 
 [data-theme="dark"] {
-    --bg-color: #121212;
-    --text-color: #e0e0e0;
-    --card-bg: #1e1e1e;
-    --header-bg: #0d0d0d;
-    --header-text: #ffd54f;
-    --nav-bg: #1a1a1a;
-    --nav-text: #ffd54f;
-    --hero-bg: linear-gradient(to right, #1f1f1f, #2d2d2d);
-    --hero-text: #e0e0e0;
-    --footer-bg: #0d0d0d;
-    --footer-text: #a0a0a0;
-    --button-bg: #ff9800;
-    --button-text: #121212;
-    --button-hover: #ffa726;
-    --shadow: 0 3px 10px rgba(0,0,0,0.5);
+    --bg-color: #0f1115;
+    --text-color: #f5f5f7;
+    --card-bg: rgba(20,24,31,0.94);
+    --header-bg: rgba(15,17,21,0.78);
+    --header-text: #f5f5f7;
+    --nav-bg: rgba(15,17,21,0.72);
+    --nav-text: #f5f5f7;
+    --hero-bg: linear-gradient(135deg, #1a1d24 0%, #11141a 100%);
+    --hero-text: #f5f5f7;
+    --footer-bg: #0f1115;
+    --footer-text: #9a9aa2;
+    --button-bg: #2997ff;
+    --button-text: #09111d;
+    --button-hover: #3aa0ff;
+    --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    --border: rgba(255,255,255,0.08);
 }
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: 'Noto Sans KR', sans-serif;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body{
@@ -57,29 +80,43 @@ body{
     color: var(--text-color);
     line-height:1.7;
     letter-spacing: -0.02em;
+    font-family: 'Outfit', 'DM Sans', sans-serif;
+    font-weight: 400;
 }
 
 h1, h2, h3 {
-    font-family: 'Noto Serif KR', serif;
-    font-weight: 700;
-    letter-spacing: -0.03em;
+    font-family: 'Bebas Neue', 'Outfit', 'DM Sans', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--header-text);
+}
+
+.hero h2,
+.card h2,
+.brand-banner h3,
+strong {
+    font-family: 'Bebas Neue', 'Outfit', 'DM Sans', sans-serif;
 }
 
 header{
     background: var(--header-bg);
     color: var(--header-text);
     text-align:center;
-    padding:30px;
+    padding:30px 20px 24px;
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
 }
 
 nav{
     background: var(--nav-bg);
     text-align:center;
-    padding:10px;
+    padding:12px 16px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 18px;
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
 }
 
 nav a{
@@ -88,60 +125,179 @@ nav a{
     margin:0 15px;
     font-weight:600;
     font-size: 0.95rem;
+    transition: color 0.25s ease, transform 0.25s ease;
 }
 
 nav a:hover{
-    color:#ffd54f;
+    color:#0071e3;
+    transform: translateY(-1px);
 }
 
 #theme-toggle {
     background: var(--card-bg);
     color: var(--text-color);
-    border: 1px solid var(--text-color);
-    padding: 5px 12px;
-    border-radius: 20px;
+    border: 1px solid var(--border);
+    padding: 7px 14px;
+    border-radius: 999px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 14px;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
 
 #theme-toggle:hover {
     background: var(--text-color);
     color: var(--bg-color);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
 }
 
 .hero{
-    background: var(--hero-bg);
+    background: linear-gradient(135deg, rgba(16,24,40,0.88), rgba(59,130,246,0.35)), url('images/weather-sky-bg.svg') center/cover no-repeat;
     color: var(--hero-text);
     text-align:center;
-    padding:60px 20px;
+    padding:110px 24px 96px;
+    border-bottom: 1px solid var(--border);
+    min-height: 460px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    margin-bottom: 12px;
+    color: #ffffff;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.35);
+}
+
+.hero p {
+    font-size: 1.05rem;
+    max-width: 680px;
+    margin: 0 auto;
+    color: rgba(255,255,255,0.9);
 }
 
 .container{
-    width:90%;
-    max-width:1000px;
-    margin:30px auto;
+    width:min(1000px, 92%);
+    margin:34px auto 60px;
+    display:grid;
+    gap:24px;
 }
 
 .card{
     background: var(--card-bg);
-    padding:20px;
-    margin-bottom:20px;
-    border-radius:10px;
+    padding:28px;
+    border-radius:24px;
     box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(0,113,227,0.06), transparent);
+    transform: translateX(-120%);
+    transition: transform 0.7s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+}
+
+.card:hover::before {
+    transform: translateX(120%);
 }
 
 ul{
     margin-left:20px;
+    display:grid;
+    gap:8px;
+}
+
+li{
+    color: var(--text-color);
+}
+
+.brand-banner {
+    margin-top: 18px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--accent-soft), rgba(255,255,255,0.04));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.brand-banner h3 {
+    margin-bottom: 4px;
+    font-size: 1.1rem;
+}
+
+.brand-banner p {
+    font-size: 0.95rem;
+    color: var(--footer-text);
+}
+
+.brand-banner-link {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--button-bg);
+    color: var(--button-text);
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.brand-banner-link:hover {
+    background: var(--button-hover);
+    transform: translateY(-1px);
 }
 
 footer{
     background: var(--footer-bg);
     color: var(--footer-text);
     text-align:center;
-    padding:15px;
-    margin-top:30px;
+    padding:24px 16px 32px;
+}
+
+#go-to-shop-btn {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding:14px 28px;
+    font-size:16px;
+    border:none;
+    border-radius:999px;
+    cursor:pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0,113,227,0.16);
+}
+
+#go-to-shop-btn:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0,113,227,0.22);
+}
+
+.scroll-item {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-item.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 </style>
 
@@ -160,32 +316,35 @@ footer{
     <button id="theme-toggle">🌙 다크 모드</button>
 </nav>
 
-<section class="hero">
+<section class="hero hero-animation">
     <h2>베이스는 밴드의 중심입니다.</h2>
     <p>드럼과 함께 리듬을 만들고 음악의 무게감을 더해줍니다.</p>
 </section>
 
 <div class="container">
 
-    <section id="about" class="card">
+    <section id="about" class="card scroll-item">
         <h2>베이스 기타란?</h2>
         <p>
-            베이스 기타는 일반 기타보다 한 옥타브 낮은 음역을 담당하는 악기입니다.
-            주로 4개의 줄을 사용하며, 밴드에서 리듬과 화성을 연결하는 중요한 역할을 합니다.
+            베이스 기타는 밴드에서 저음과 리듬의 뼈대를 만드는 악기입니다.
+            일반 기타보다 낮은 음역에서 울리며, 드럼과 함께 박자를 지탱하고 곡의 흐름을 안정적으로 연결해 줍니다.
+            단순히 낮은 소리를 내는 악기라고만 생각하기 쉽지만, 실제로는 노래의 중심 감각을 만들고 밴드의 분위기를 결정하는 핵심 역할을 합니다.
+            또한 음악의 화성 구조를 보강해 주며, 록, 재즈, 펑크, 팝, 메탈 등 거의 모든 장르에서 중요한 위치를 차지합니다.
         </p>
     </section>
 
-    <section id="types" class="card">
+    <section id="types" class="card scroll-item">
         <h2>베이스의 종류</h2>
+        <p>베이스는 단순히 현의 개수로 구분하기보다, 연주 스타일과 사운드 성향에 따라 분류하는 경우가 많습니다.</p>
         <ul>
-            <li>🎵 4현 베이스</li>
-            <li>🎵 5현 베이스</li>
-            <li>🎵 6현 베이스</li>
-            <li>🎵 프렛리스 베이스</li>
+            <li><strong>🎵 프레시전 베이스</strong>: 둥글고 묵직한 저음이 특징이며, 클래식한 록과 팝 사운드에 잘 어울립니다.</li>
+            <li><strong>🎵 재즈 베이스</strong>: 밝고 선명한 톤과 세밀한 음색 표현이 가능해, 재즈·펑크·세션 연주에 자주 쓰입니다.</li>
+            <li><strong>🎵 콘트라베이스</strong>: 더 깊고 풍부한 저음을 내며, 오케스트라나 어쿠스틱한 분위기를 필요로 할 때 적합합니다.</li>
+            <li><strong>🎵 액티브/패시브 베이스</strong>: 전자 증폭 방식에 따라 톤의 선명함과 출력이 달라지며, 라이브와 스튜디오 모두 자주 선택됩니다.</li>
         </ul>
     </section>
 
-    <section id="features" class="card">
+    <section id="features" class="card scroll-item">
         <h2>베이스의 특징</h2>
         <ul>
             <li>낮고 묵직한 저음을 연주합니다.</li>
@@ -220,6 +379,42 @@ footer{
     >
         🎸 베이스 고수샵 바로가기
     </button>
+</div>
+
+<div style="width:min(1000px, 92%); margin:0 auto 40px;">
+    <section class="card scroll-item" style="padding:24px;">
+        <h2 style="margin-bottom: 16px;">대표 브랜드들</h2>
+        <div style="display:grid; gap:14px;">
+            <div class="brand-banner">
+                <div>
+                    <h3>Fender</h3>
+                    <p>전통과 실용성을 모두 갖춘 대표적인 베이스 브랜드로, Precision Bass와 Jazz Bass로 유명합니다.</p>
+                </div>
+                <a class="brand-banner-link" href="https://www.fender.com/" target="_blank" rel="noopener noreferrer">Fender 홈페이지</a>
+            </div>
+            <div class="brand-banner">
+                <div>
+                    <h3>Ibanez</h3>
+                    <p>빠른 연주감과 세련된 디자인으로 메탈, 퓨전, 모던 장르에서 많은 사랑을 받고 있습니다.</p>
+                </div>
+                <a class="brand-banner-link" href="https://www.ibanez.com/" target="_blank" rel="noopener noreferrer">Ibanez 홈페이지</a>
+            </div>
+            <div class="brand-banner">
+                <div>
+                    <h3>Music Man</h3>
+                    <p>강력한 액티브 사운드와 독창적인 톤으로 라이브와 스튜디오 모두에서 인기가 높습니다.</p>
+                </div>
+                <a class="brand-banner-link" href="https://www.music-man.com/" target="_blank" rel="noopener noreferrer">Music Man 홈페이지</a>
+            </div>
+            <div class="brand-banner">
+                <div>
+                    <h3>Warwick</h3>
+                    <p>독일 프리미엄 베이스 브랜드로, 정밀한 제작과 깊은 저음 톤으로 알려져 있습니다.</p>
+                </div>
+                <a class="brand-banner-link" href="https://www.warnersound.com/warwick" target="_blank" rel="noopener noreferrer">Warwick 홈페이지</a>
+            </div>
+        </div>
+    </section>
 </div>
 
 <script>
@@ -280,420 +475,5 @@ items.forEach(item=>{
 });
 
 </script>
-</body>
-```html
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BASS 브랜드 소개</title>
-
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-    }
-
-    body {
-        background: #f5f5f5;
-        color: #222;
-        line-height: 1.6;
-    }
-
-    header {
-        background: linear-gradient(135deg, #111, #444);
-        color: white;
-        padding: 60px 20px;
-        text-align: center;
-    }
-
-    header h1 {
-        font-size: 48px;
-        margin-bottom: 10px;
-    }
-
-    header p {
-        font-size: 20px;
-        color: #ddd;
-    }
-
-    nav {
-        background: #222;
-        padding: 15px;
-        text-align: center;
-    }
-
-    nav a {
-        color: white;
-        text-decoration: none;
-        margin: 0 15px;
-        font-weight: bold;
-    }
-
-    nav a:hover {
-        color: #ff9800;
-    }
-
-    .container {
-        width: 90%;
-        max-width: 1100px;
-        margin: 40px auto;
-    }
-
-    .brand {
-        background: white;
-        padding: 30px;
-        margin-bottom: 30px;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-
-    .brand h2 {
-        color: #ff9800;
-        margin-bottom: 15px;
-    }
-
-    .brand p {
-        margin-bottom: 15px;
-    }
-
-    .models {
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
-
-    .card {
-        flex: 1;
-        min-width: 250px;
-        background: #222;
-        color: white;
-        padding: 25px;
-        border-radius: 12px;
-    }
-
-    .card h3 {
-        color: #ff9800;
-        margin-bottom: 10px;
-    }
-
-    footer {
-        background: #111;
-        color: white;
-        text-align: center;
-        padding: 25px;
-        margin-top: 50px;
-    }
-
-    button {
-        margin-top: 20px;
-        padding: 12px 25px;
-        border: none;
-        border-radius: 30px;
-        background: #ff9800;
-        color: white;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    button:hover {
-        background: #e68900;
-    }
-    /* =========================
-   Animation Effects
-========================= */
-
-/* 페이지 시작 시 히어로 등장 */
-.hero-animation {
-    animation: fadeDown 1.2s ease-out;
-}
-
-@keyframes fadeDown {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-/* 스크롤 등장 기본 상태 */
-.scroll-item {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: 
-        opacity 0.8s ease,
-        transform 0.8s ease;
-}
-
-
-/* 화면에 들어왔을 때 */
-.scroll-item.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-/* 브랜드 카드 Hover 효과 */
-.card {
-    transition:
-        transform 0.4s ease,
-        box-shadow 0.4s ease;
-    cursor: pointer;
-}
-
-
-.card:hover {
-
-    transform:
-        translateY(-15px)
-        scale(1.03);
-
-    box-shadow:
-        0 15px 35px rgba(255,152,0,0.35);
-
-}
-
-
-/* 브랜드 박스 Hover */
-
-.brand {
-
-    transition:
-        transform 0.4s ease,
-        box-shadow 0.4s ease;
-
-}
-
-
-.brand:hover {
-
-    transform: translateY(-8px);
-
-    box-shadow:
-        0 20px 40px rgba(0,0,0,0.2);
-
-}
-
-
-/* 버튼 빛나는 효과 */
-
-button {
-
-    position: relative;
-    overflow: hidden;
-
-}
-
-
-button::after {
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:-100%;
-
-    width:100%;
-    height:100%;
-
-    background:
-    linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,0.6),
-        transparent
-    );
-
-    transition:0.5s;
-
-}
-
-
-button:hover::after {
-
-    left:100%;
-
-}
-
-
-/* 베이스 사이트 느낌의 네온 효과 */
-
-.card h3 {
-
-    text-shadow:
-    0 0 10px rgba(255,152,0,0.6);
-
-}
-
-
-/* 이미지 확대 효과 */
-
-.brand img {
-
-    transition:
-    transform 0.5s ease;
-
-}
-
-
-.brand:hover img {
-
-    transform:
-    scale(1.08);
-
-}
-</style>
-
-</head>
-
-<body>
-
-<header>
-    <h1>BASS GUITAR</h1>
-    <p>저음으로 음악을 완성하는 최고의 브랜드들</p>
-</header>
-
-
-<nav>
-    <a href="#fender">Fender</a>
-    <a href="#ibanez">Ibanez</a>
-    <a href="#musicman">Music Man</a>
-    <a href="#warwick">Warwick</a>
-</nav>
-
-
-<div class="container">
-
-
-<section class="brand" id="fender">
-
-<h2>Fender</h2>
-
-<p>
-1946년 설립된 Fender는 일렉트릭 기타와 베이스 역사에서
-가장 영향력 있는 브랜드 중 하나입니다.
-</p>
-
-<p>
-대표 모델인 Precision Bass와 Jazz Bass는
-수많은 뮤지션들이 사용하는 클래식 베이스입니다.
-</p>
-
-<div class="models">
-
-<div class="card">
-<h3>Precision Bass</h3>
-<p>
-강력한 저음과 두꺼운 사운드.
-록과 팝 음악에서 사랑받는 모델.
-</p>
-</div>
-
-<div class="card">
-<h3>Jazz Bass</h3>
-<p>
-밝고 선명한 톤.
-펑크, 재즈, 세션 연주에 적합.
-</p>
-</div>
-
-</div>
-
-</section>
-
-
-
-<section class="brand" id="ibanez">
-
-<h2>Ibanez</h2>
-
-<p>
-Ibanez는 빠른 연주성과 현대적인 디자인으로
-메탈과 퓨전 장르에서 인기가 높은 브랜드입니다.
-</p>
-
-<div class="models">
-
-<div class="card">
-<h3>SR Series</h3>
-<p>
-얇은 넥과 뛰어난 연주감이 특징.
-</p>
-</div>
-
-</div>
-
-</section>
-
-
-
-<section class="brand" id="musicman">
-
-<h2>Music Man</h2>
-
-<p>
-Music Man StingRay는 강력한 액티브 사운드와
-독특한 디자인으로 유명합니다.
-</p>
-
-</section>
-
-
-
-<section class="brand" id="warwick">
-
-<h2>Warwick</h2>
-
-<p>
-독일 프리미엄 베이스 브랜드.
-정밀한 제작과 깊은 톤으로 유명합니다.
-</p>
-
-</section>
-
-
-<button onclick="changeTheme()">
-테마 변경
-</button>
-
-
-</div>
-
-
-<footer>
-<p>
-© 2026 Bass Brand Introduction
-</p>
-</footer>
-
-
-<script>
-
-function changeTheme(){
-
-    document.body.style.background =
-    document.body.style.background === "black"
-    ? "#f5f5f5"
-    : "black";
-
-    document.body.style.color =
-    document.body.style.color === "white"
-    ? "#222"
-    : "white";
-
-}
-
-</script>
-
-
 </body>
 </html>

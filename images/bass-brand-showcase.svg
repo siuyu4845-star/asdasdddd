@@ -1,0 +1,56 @@
+<svg width="1400" height="900" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="60%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="50%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#94a3b8"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="20" stdDeviation="18" flood-color="#000000" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+
+  <rect x="28" y="28" width="1344" height="844" rx="38" fill="url(#bg)"/>
+  <rect x="60" y="60" width="1280" height="780" rx="30" fill="#020617" opacity="0.45"/>
+
+  <circle cx="1100" cy="220" r="180" fill="#f59e0b" opacity="0.18"/>
+  <circle cx="275" cy="700" r="220" fill="#38bdf8" opacity="0.12"/>
+
+  <g filter="url(#shadow)">
+    <rect x="220" y="180" width="960" height="540" rx="30" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+    <rect x="260" y="220" width="880" height="460" rx="24" fill="#111827" stroke="#475569" stroke-width="1.5"/>
+
+    <path d="M420 320C430 260 480 230 560 220L760 220C870 220 940 280 950 370L950 520C950 610 875 660 780 660L560 660C470 660 420 610 420 520Z" fill="url(#metal)"/>
+    <path d="M450 330C455 280 500 255 565 250L730 250C835 250 903 305 903 405L903 505C903 595 835 635 745 635L575 635C495 635 450 590 450 515Z" fill="#f8fafc" opacity="0.18"/>
+
+    <rect x="520" y="270" width="188" height="72" rx="18" fill="#020617" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="545" y="292" width="138" height="24" rx="12" fill="url(#accent)"/>
+
+    <rect x="480" y="360" width="260" height="40" rx="20" fill="#111827" stroke="#64748b" stroke-width="2"/>
+    <rect x="512" y="372" width="196" height="16" rx="8" fill="#cbd5e1" opacity="0.85"/>
+
+    <rect x="740" y="312" width="130" height="210" rx="22" fill="#020617" stroke="#64748b" stroke-width="2"/>
+    <rect x="760" y="332" width="90" height="170" rx="16" fill="#111827" stroke="#94a3b8" stroke-width="1.5"/>
+
+    <circle cx="625" cy="430" r="34" fill="#020617" stroke="#64748b" stroke-width="2"/>
+    <circle cx="625" cy="430" r="18" fill="#f59e0b"/>
+
+    <path d="M698 428C720 412 740 402 770 388" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/>
+    <path d="M718 468C740 460 756 454 776 446" stroke="#60a5fa" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <rect x="120" y="126" width="420" height="64" rx="32" fill="#f8fafc" opacity="0.95"/>
+  <text x="156" y="166" font-family="'Segoe UI', 'Inter', sans-serif" font-size="30" font-weight="700" fill="#0f172a">Premium Bass Brand</text>
+
+  <text x="220" y="706" font-family="'Segoe UI', 'Inter', sans-serif" font-size="34" font-weight="700" fill="#f8fafc">Yamaha • Warwick • Fender</text>
+  <text x="220" y="748" font-family="'Segoe UI', 'Inter', sans-serif" font-size="20" fill="#cbd5e1">Crafted for rich tone and modern elegance</text>
+</svg>
