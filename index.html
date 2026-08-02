@@ -783,7 +783,15 @@ megaClose && megaClose.addEventListener('click', (e)=>{
 
 // Click outside to close on mobile
 document.addEventListener('click', (e)=>{
+    // mobile click outside closes menu (existing)
     if(!isMobile()) return;
+    if(headerInner.contains(e.target)) return;
+    closeMenu();
+});
+
+// On desktop, clicking anywhere outside the header/mega-menu should close the menu
+document.addEventListener('click', (e)=>{
+    if(isMobile()) return;
     if(headerInner.contains(e.target)) return;
     closeMenu();
 });
@@ -860,9 +868,11 @@ function handleMouseEnter(){
 }
 
 function handleMouseLeave(){
-    // keep for compatibility but actual close will be handled by pointer watch
+    // On desktop, when pointer leaves the header-inner (which contains the mega menu),
+    // close immediately so banner disappears as soon as mouse leaves.
     if(isMobile()) return;
     clearTimeout(openTimer);
+    closeMenu();
 }
 
 headerInner.addEventListener('mouseenter', handleMouseEnter);
@@ -988,6 +998,28 @@ document.querySelectorAll('.mega-item').forEach(item=>{
     item.addEventListener('focus', showPreview);
     item.addEventListener('mouseleave', restoreDefault);
     item.addEventListener('blur', restoreDefault);
+});
+
+// Keyboard navigation: arrow up/down to move between brand items when menu is open
+document.addEventListener('keydown', (e)=>{
+    if(isMobile()) return;
+    if(!headerInner.classList.contains('open')) return;
+    const items = Array.from(document.querySelectorAll('.mega-item'));
+    if(!items.length) return;
+    const active = document.activeElement;
+    let idx = items.indexOf(active);
+    if(e.key === 'ArrowDown'){
+        e.preventDefault();
+        if(idx === -1){ items[0].focus(); }
+        else { items[Math.min(items.length-1, idx+1)].focus(); }
+    } else if(e.key === 'ArrowUp'){
+        e.preventDefault();
+        if(idx === -1){ items[items.length-1].focus(); }
+        else { items[Math.max(0, idx-1)].focus(); }
+    } else if(e.key === 'Escape'){
+        // close menu on Esc
+        closeMenu();
+    }
 });
 
 
