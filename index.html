@@ -942,6 +942,22 @@ document.querySelectorAll('.brand-banner-link').forEach(link=>{
     });
 });
 
+// Ensure mega-links in the banner close the menu on click, then scroll to target
+document.querySelectorAll('.mega-links a').forEach(a=>{
+    a.addEventListener('click', (e)=>{
+        const href = a.getAttribute('href');
+        if(!href || !href.startsWith('#')) return; // external or no-hash ignored
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if(!target) return;
+        // close menu, then smooth scroll
+        closeMenu();
+        setTimeout(()=>{
+            target.scrollIntoView({behavior:'smooth', block:'start'});
+        }, 220);
+    });
+});
+
 
 const items = document.querySelectorAll(".scroll-item");
 
