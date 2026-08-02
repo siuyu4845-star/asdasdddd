@@ -101,11 +101,86 @@ strong {
 header{
     background: var(--header-bg);
     color: var(--header-text);
-    text-align:center;
-    padding:30px 20px 24px;
+    padding:18px 20px;
     backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--border);
 }
+
+.header-inner{
+    width: min(1100px, 96%);
+    margin: 0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+}
+
+.logo-wrapper{
+    position: relative;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor: default;
+}
+
+.logo {
+    width:44px;
+    height:44px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.site-title{
+    text-align:left;
+}
+
+.site-title h1{font-size:1.1rem;margin-bottom:2px}
+.site-title p{font-size:0.85rem;opacity:0.85;margin:0}
+
+/* Mega menu that drops down when hovering the logo-wrapper */
+.mega-menu{
+    position: absolute;
+    left: 0;
+    top: calc(100% + 12px);
+    width: 680px;
+    background: #ffffff;
+    color: #111;
+    border-radius:14px;
+    box-shadow: 0 30px 60px rgba(15,20,30,0.18);
+    padding:20px;
+    transform: translateY(-16px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.35s ease, opacity 0.28s ease, visibility 0.28s;
+    z-index: 60;
+}
+
+.logo-wrapper:hover .mega-menu,
+.logo-wrapper:focus-within .mega-menu{
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.mega-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:12px;
+}
+
+.mega-item{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    padding:10px;
+    border-radius:10px;
+    transition: background 0.18s ease, transform 0.18s ease;
+}
+.mega-item:hover{background: #f6f7fb; transform: translateY(-4px)}
+.mega-item .thumb{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#e6eefc,#dff3e6);display:flex;align-items:center;justify-content:center;font-weight:700;color:#0b3a66}
+.mega-item .meta h4{margin:0;font-size:0.98rem}
+.mega-item .meta p{margin:0;font-size:0.83rem;opacity:0.75}
 
 nav{
     background: var(--nav-bg);
@@ -305,15 +380,85 @@ footer{
 <body>
 
 <header>
-    <h1>🎸 베이스 기타 소개</h1>
-    <p>음악의 리듬과 저음을 책임지는 악기</p>
+    <div class="header-inner">
+        <div class="logo-wrapper" tabindex="0">
+            <div class="logo" aria-hidden="true">
+                <!-- simple glyph-like logo (abstract bass leaf) -->
+                <svg width="44" height="44" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="48" height="48" rx="10" fill="#0b67ff"/>
+                    <path d="M14 30c6-8 14-10 18-9" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="34" cy="16" r="3.2" fill="#fff"/>
+                </svg>
+            </div>
+
+            <div class="mega-menu" role="navigation" aria-label="브랜드 메뉴">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+                    <strong>브랜드 컬렉션</strong>
+                    <small style="color:#666">대표 브랜드를 확인하세요</small>
+                </div>
+                <div class="mega-grid">
+                    <a class="mega-item" href="https://www.fender.com/" target="_blank" rel="noopener noreferrer">
+                        <div class="thumb">F</div>
+                        <div class="meta">
+                            <h4>Fender</h4>
+                            <p>Precision / Jazz 등 전통의 사운드</p>
+                        </div>
+                    </a>
+                    <a class="mega-item" href="https://www.ibanez.com/" target="_blank" rel="noopener noreferrer">
+                        <div class="thumb">I</div>
+                        <div class="meta">
+                            <h4>Ibanez</h4>
+                            <p>메탈과 모던 톤에 강한 디자인</p>
+                        </div>
+                    </a>
+                    <a class="mega-item" href="https://www.music-man.com/" target="_blank" rel="noopener noreferrer">
+                        <div class="thumb">M</div>
+                        <div class="meta">
+                            <h4>Music Man</h4>
+                            <p>액티브 픽업의 강력한 출력</p>
+                        </div>
+                    </a>
+                    <a class="mega-item" href="https://www.warnersound.com/warwick" target="_blank" rel="noopener noreferrer">
+                        <div class="thumb">W</div>
+                        <div class="meta">
+                            <h4>Warwick</h4>
+                            <p>독일 제작의 깊고 정밀한 저음</p>
+                        </div>
+                    </a>
+                    <a class="mega-item" href="#types">
+                        <div class="thumb">J</div>
+                        <div class="meta">
+                            <h4>기타 브랜드</h4>
+                            <p>더 많은 브랜드와 모델 보기</p>
+                        </div>
+                    </a>
+                    <a class="mega-item" href="#about">
+                        <div class="thumb">A</div>
+                        <div class="meta">
+                            <h4>소개</h4>
+                            <p>베이스에 대한 기본 정보</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-title">
+            <h1>🎸 베이스 기타 소개</h1>
+            <p>음악의 리듬과 저음을 책임지는 악기</p>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:14px">
+            <nav style="display:none;">&nbsp;</nav>
+            <button id="theme-toggle">🌙 다크 모드</button>
+        </div>
+    </div>
 </header>
 
 <nav>
     <a href="#about">소개</a>
     <a href="#types">종류</a>
     <a href="#features">특징</a>
-    <button id="theme-toggle">🌙 다크 모드</button>
 </nav>
 
 <section class="hero hero-animation">
