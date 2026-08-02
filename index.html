@@ -134,19 +134,19 @@ header{
 /* Mega menu that drops down when hovering the logo-wrapper */
 
 .mega-menu{
-    position: absolute;
+    /* make the menu fixed so it overlays page content reliably */
+    position: fixed;
     left: 0;
-    top: 100%;
+    top: 76px; /* directly under the fixed header */
     width: 100vw;
-    background: var(--header-bg);
-    backdrop-filter: blur(8px);
+    background: transparent; /* inner panel handles background */
     padding: 0 12px;
-    transform: translateY(-10px);
+    transform: translateY(-8px);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: transform 0.35s cubic-bezier(.2,.9,.2,1), opacity 0.28s ease, visibility 0.28s;
-    z-index: 11000; /* ensure banner sits above other page content */
+    transition: transform 0.32s cubic-bezier(.2,.9,.2,1), opacity 0.26s ease, visibility 0.26s;
+    z-index: 12000; /* ensure banner sits above other page content */
 }
 
 /* show state via hover OR .open class (used by JS for delayed open) */
@@ -160,20 +160,22 @@ header{
 }
 
 .mega-inner{
-    width: 50vw;
+    /* center the inner panel while allowing the menu itself to be full-bleed */
+    width: 100%;
     max-width: 1200px;
-    min-width: 360px;
+    min-width: 320px;
     margin: 0 auto;
     background: var(--header-bg);
     color: var(--header-text);
     border-radius:14px;
     box-shadow: 0 30px 60px rgba(15,20,30,0.12);
-    padding:28px 28px; /* increase top/bottom padding for vertical balance */
+    padding:22px 24px;
     border: 1px solid var(--border);
     display:flex;
     flex-direction:column;
     justify-content:flex-start;
     align-items:stretch;
+    will-change: transform, opacity; /* hint for smoother animations */
 }
 
 .media-fix {}
@@ -255,10 +257,13 @@ header{
 #mega-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.28); opacity:0; visibility:hidden; transition:opacity 250ms ease; z-index:10500}
 #mega-overlay.show{opacity:1; visibility:visible}
 
+/* prevent body scroll when mega menu is open */
+.no-scroll { overflow: hidden; }
+
 /* remove left thumbnail space by making items compact */
 .mega-item{padding:14px 12px}
 .mega-item .meta h4, .mega-item .meta p{line-height:1.15; margin:0}
-.mega-links a{display:inline-flex; align-items:center; padding:6px 8px; line-height:1}
+.mega-links a{display:inline-flex; align-items:center; padding:0 10px; line-height:1; height:44px}
 
 /* ensure theme toggle lines up */
 #theme-toggle{height:36px; display:inline-flex; align-items:center;}
@@ -738,6 +743,15 @@ headerInner.addEventListener('click', (e)=>{
     headerInner.classList.toggle('open');
     const expanded = headerInner.classList.contains('open');
     headerInner.setAttribute('aria-expanded', expanded?'true':'false');
+    // overlay + scroll lock for mobile
+    const overlay = document.getElementById('mega-overlay');
+    if(expanded){
+        overlay.classList.add('show');
+        document.body.classList.add('no-scroll');
+    } else {
+        overlay.classList.remove('show');
+        document.body.classList.remove('no-scroll');
+    }
     // trigger staggered animation on mobile open
     animateMega(expanded);
 });
@@ -749,6 +763,7 @@ megaClose && megaClose.addEventListener('click', (e)=>{
     headerInner.setAttribute('aria-expanded','false');
     animateMega(false);
     document.getElementById('mega-overlay').classList.remove('show');
+    document.body.classList.remove('no-scroll');
 });
 
 // Click outside to close on mobile
@@ -757,6 +772,8 @@ document.addEventListener('click', (e)=>{
     if(headerInner.contains(e.target)) return;
     headerInner.classList.remove('open');
     headerInner.setAttribute('aria-expanded','false');
+    document.getElementById('mega-overlay').classList.remove('show');
+    document.body.classList.remove('no-scroll');
 });
 
 // Ensure aria state on resize
@@ -784,6 +801,7 @@ function handleMouseEnter(){
         headerInner.classList.add('open');
         headerInner.setAttribute('aria-expanded','true');
         document.getElementById('mega-overlay').classList.add('show');
+        document.body.classList.add('no-scroll');
         animateMega(true);
     }, HOVER_OPEN_MS);
 }
@@ -795,6 +813,7 @@ function handleMouseLeave(){
         headerInner.classList.remove('open');
         headerInner.setAttribute('aria-expanded','false');
         document.getElementById('mega-overlay').classList.remove('show');
+        document.body.classList.remove('no-scroll');
         animateMega(false);
     }, HOVER_CLOSE_MS);
 }
@@ -820,6 +839,16 @@ megaMenu && megaMenu.addEventListener('mouseleave', (e)=>{
         document.getElementById('mega-overlay').classList.remove('show');
         animateMega(false);
     }, HOVER_CLOSE_MS);
+});
+
+// overlay click should close the menu
+const overlayEl = document.getElementById('mega-overlay');
+overlayEl && overlayEl.addEventListener('click', ()=>{
+    headerInner.classList.remove('open');
+    headerInner.setAttribute('aria-expanded','false');
+    document.getElementById('mega-overlay').classList.remove('show');
+    document.body.classList.remove('no-scroll');
+    animateMega(false);
 });
 
 </script>
