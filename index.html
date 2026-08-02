@@ -849,6 +849,8 @@ function openMenu({withOverlay=false} = {}){
     headerInner.setAttribute('aria-expanded','true');
     animateMega(true);
     startPointerWatch();
+    // start auto-cycling brands when menu opens on desktop
+    startAutoCycle();
     if(withOverlay){ document.getElementById('mega-overlay').classList.add('show'); document.body.classList.add('no-scroll'); }
 }
 
@@ -857,8 +859,34 @@ function closeMenu(){
     headerInner.setAttribute('aria-expanded','false');
     animateMega(false);
     stopPointerWatch();
+    // stop auto-cycling when closing
+    stopAutoCycle();
     document.getElementById('mega-overlay').classList.remove('show');
     document.body.classList.remove('no-scroll');
+}
+
+// Auto-cycle (autoplay) for mega-items while menu is open on desktop
+const AUTOPLAY_INTERVAL_MS = 2400;
+let autoCycleTimer = null;
+function startAutoCycle(){
+    if(isMobile()) return;
+    if(autoCycleTimer) return;
+    const items = Array.from(document.querySelectorAll('.mega-item'));
+    if(!items.length) return;
+    autoCycleTimer = setInterval(()=>{
+        // only cycle while menu is open
+        if(!headerInner.classList.contains('open')) return;
+        const active = document.activeElement;
+        let idx = items.indexOf(active);
+        if(idx === -1){ items[0].focus(); }
+        else { items[(idx + 1) % items.length].focus(); }
+    }, AUTOPLAY_INTERVAL_MS);
+}
+
+function stopAutoCycle(){
+    if(!autoCycleTimer) return;
+    clearInterval(autoCycleTimer);
+    autoCycleTimer = null;
 }
 
 function handleMouseEnter(){
@@ -882,12 +910,16 @@ headerInner.addEventListener('mouseleave', handleMouseLeave);
 megaMenu && megaMenu.addEventListener('mouseenter', (e)=>{
     if(isMobile()) return;
     clearTimeout(closeTimer);
+    // user interacting with menu: pause auto-cycle
+    stopAutoCycle();
     openMenu({ withOverlay:false });
 });
 megaMenu && megaMenu.addEventListener('mouseleave', (e)=>{
     if(isMobile()) return;
     // don't immediately close here; pointer watch will detect when pointer goes below menu
     clearTimeout(openTimer);
+    // resume auto-cycle shortly after pointer leaves
+    setTimeout(()=>{ startAutoCycle(); }, 600);
 });
 
 // overlay click should close the menu
@@ -995,10 +1027,10 @@ document.querySelectorAll('.mega-item').forEach(item=>{
         if(featureP) featureP.innerText = '대표 브랜드와 추천 모델을 한눈에 살펴보세요. 최신 모델, 사운드 특징, 링크를 제공합니다.';
     }
 
-    item.addEventListener('mouseenter', showPreview);
-    item.addEventListener('focus', showPreview);
-    item.addEventListener('mouseleave', restoreDefault);
-    item.addEventListener('blur', restoreDefault);
+    item.addEventListener('mouseenter', (e)=>{ stopAutoCycle(); showPreview(); });
+    item.addEventListener('focus', (e)=>{ stopAutoCycle(); showPreview(); });
+    item.addEventListener('mouseleave', (e)=>{ restoreDefault(); setTimeout(()=>startAutoCycle(), 500); });
+    item.addEventListener('blur', (e)=>{ restoreDefault(); setTimeout(()=>startAutoCycle(), 500); });
 });
 
 // Keyboard navigation: arrow up/down to move between brand items when menu is open
