@@ -868,11 +868,12 @@ function handleMouseEnter(){
 }
 
 function handleMouseLeave(){
-    // On desktop, when pointer leaves the header-inner (which contains the mega menu),
-    // close immediately so banner disappears as soon as mouse leaves.
+    // Do not close immediately on mouse leave; allow pointer-watch to close
+    // when the pointer actually moves below the menu. This keeps the banner
+    // visible while moving between header and menu.
     if(isMobile()) return;
     clearTimeout(openTimer);
-    closeMenu();
+    // leave close to pointer watch / explicit clicks
 }
 
 headerInner.addEventListener('mouseenter', handleMouseEnter);
