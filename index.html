@@ -139,29 +139,44 @@ header{
 .site-title p{font-size:0.85rem;opacity:0.85;margin:0}
 
 /* Mega menu that drops down when hovering the logo-wrapper */
+
 .mega-menu{
     position: absolute;
-    left: 0;
+    left: 50%;
     top: calc(100% + 12px);
-    width: 680px;
-    background: #ffffff;
-    color: #111;
+    width: 50vw;
+    max-width: 900px;
+    min-width: 360px;
+    background: var(--header-bg);
+    color: var(--header-text);
     border-radius:14px;
-    box-shadow: 0 30px 60px rgba(15,20,30,0.18);
+    box-shadow: 0 30px 60px rgba(15,20,30,0.12);
     padding:20px;
-    transform: translateY(-16px);
+    transform: translate(-50%, -16px);
     opacity: 0;
     visibility: hidden;
     transition: transform 0.35s ease, opacity 0.28s ease, visibility 0.28s;
     z-index: 60;
+    border: 1px solid var(--border);
 }
 
 .header-inner:hover .mega-menu,
 .header-inner:focus-within .mega-menu{
-    transform: translateY(0);
+    transform: translate(-50%, 0);
     opacity: 1;
     visibility: visible;
 }
+
+.mega-links{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    margin-bottom:12px;
+    position:relative;
+    top:-6px;
+}
+
+.mega-menu a{color:inherit; text-decoration:none}
 
 .mega-grid{
     display:grid;
@@ -392,12 +407,12 @@ footer{
             </div>
 
             <div class="mega-menu" role="navigation" aria-label="브랜드 메뉴">
-                <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
-                    <a href="#about" style="text-decoration:none; color:inherit; font-weight:600;">소개</a>
-                    <a href="#types" style="text-decoration:none; color:inherit; font-weight:600;">종류</a>
-                    <a href="#features" style="text-decoration:none; color:inherit; font-weight:600;">특징</a>
+                <div class="mega-links">
+                    <a href="#about" style="font-weight:600;">소개</a>
+                    <a href="#types" style="font-weight:600;">종류</a>
+                    <a href="#features" style="font-weight:600;">특징</a>
                     <div style="margin-left:auto">
-                        <button id="theme-toggle">🌙 라이트모드</button>
+                        <button id="theme-toggle">🌙 다크 모드</button>
                     </div>
                 </div>
                 <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
