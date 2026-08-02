@@ -25,6 +25,8 @@
     --button-hover: #0077ed;
     --shadow: 0 10px 30px rgba(0,0,0,0.08);
     --border: rgba(0,0,0,0.06);
+    --item-hover: rgba(0,0,0,0.04);
+    --highlight: rgba(0,113,227,0.12);
 }
 
 [data-theme="light"] {
@@ -63,6 +65,8 @@
     --button-hover: #3aa0ff;
     --shadow: 0 10px 30px rgba(0,0,0,0.35);
     --border: rgba(255,255,255,0.08);
+    --item-hover: rgba(255,255,255,0.04);
+    --highlight: rgba(41,151,255,0.12);
 }
 
 *{
@@ -305,7 +309,7 @@ header{
     border-radius:10px;
     transition: background 0.18s ease, transform 0.18s ease;
 }
-.mega-item:hover{background: #f6f7fb; transform: translateY(-4px)}
+.mega-item:hover{background: var(--item-hover); transform: translateY(-4px)}
 .mega-item .thumb{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#e6eefc,#dff3e6);display:flex;align-items:center;justify-content:center;font-weight:700;color:#0b3a66}
 .mega-item .meta h4{margin:0;font-size:0.98rem}
 .mega-item .meta p{margin:0;font-size:0.83rem;opacity:0.75}
@@ -509,6 +513,16 @@ footer{
 #about, #types, #features { scroll-margin-top: 92px; }
 </style>
 
+<style>
+/* highlight effect when scrolling to brands */
+.flash-highlight{animation: brandFlash 1100ms ease both}
+@keyframes brandFlash{
+    0%{ box-shadow: 0 0 0 0 transparent }
+    30%{ box-shadow: 0 10px 40px -6px var(--highlight) }
+    100%{ box-shadow: 0 0 0 0 transparent }
+}
+</style>
+
 </head>
 <body>
 
@@ -540,7 +554,7 @@ footer{
                         <div class="mega-feature">
                             <h2 style="margin:0 0 8px">베이스 브랜드 하이라이트</h2>
                             <p style="margin:0 0 14px; color:var(--footer-text)">대표 브랜드와 추천 모델을 한눈에 살펴보세요. 최신 모델, 사운드 특징, 링크를 제공합니다.</p>
-                            <a class="brand-banner-link" href="#types">전체 모델 보기</a>
+                            <a class="brand-banner-link" href="#brands">전체 모델 보기</a>
                         </div>
 
                         <div>
@@ -665,7 +679,7 @@ footer{
     </button>
 </div>
 
-<div style="width:min(1000px, 92%); margin:0 auto 40px;">
+<div id="brands" style="width:min(1000px, 92%); margin:0 auto 40px;">
     <section class="card scroll-item" style="padding:24px;">
         <h2 style="margin-bottom: 16px;">대표 브랜드들</h2>
         <div style="display:grid; gap:14px;">
@@ -907,6 +921,27 @@ function animateMega(open){
 }
 </script>
 <script>
+
+// Smooth scroll + highlight for '전체 모델 보기' which should reveal the brands area
+document.querySelectorAll('.brand-banner-link').forEach(link=>{
+    // only target the mega-feature link (href="#brands")
+    if(link.getAttribute('href') !== '#brands') return;
+    link.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const target = document.getElementById('brands');
+        if(!target) return;
+        // close the menu first for visual clarity
+        closeMenu();
+        // scroll into view (center) and then flash highlight
+        setTimeout(()=>{
+            target.scrollIntoView({behavior:'smooth', block:'center'});
+            target.classList.remove('flash-highlight');
+            void target.offsetWidth;
+            target.classList.add('flash-highlight');
+        }, 220);
+    });
+});
+
 
 const items = document.querySelectorAll(".scroll-item");
 
