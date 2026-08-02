@@ -789,8 +789,8 @@ window.addEventListener('resize', ()=>{
 // Desktop: add small hover delay like Apple for smooth open/close
 let openTimer = null;
 let closeTimer = null;
-const HOVER_OPEN_MS = 160; // slightly increased to avoid accidental opens
-const HOVER_CLOSE_MS = 320; // increase close delay to prevent flicker when moving pointer
+const HOVER_OPEN_MS = 200; // slightly increased to avoid accidental opens
+const HOVER_CLOSE_MS = 700; // increased more to prevent flicker when moving pointer between header and menu
 // animation timing
 const STAGGER_STEP_MS = 90; // step between staggered items
 const STAGGER_DURATION_MS = 420; // duration of each fadeUp
